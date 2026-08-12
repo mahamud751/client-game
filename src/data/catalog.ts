@@ -68,15 +68,13 @@ export const themes: Theme[] = [
   {
     slug: "star-wars",
     name: "Star Wars",
-    image:
-      "https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=400&h=400&fit=crop",
+    image: "/themes/star-wars.jpg",
     color: "#1a1a2e",
   },
   {
     slug: "transformers",
     name: "Transformers",
-    image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop",
+    image: "/heroes/01-throne.jpg",
     color: "#c0392b",
   },
   {
@@ -96,15 +94,13 @@ export const themes: Theme[] = [
   {
     slug: "one-piece",
     name: "One Piece",
-    image:
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop",
+    image: "/themes/one-piece.jpg",
     color: "#1e90ff",
   },
   {
     slug: "godzilla",
     name: "Godzilla",
-    image:
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop",
+    image: "/themes/godzilla.jpg",
     color: "#2d5016",
   },
   {
@@ -131,17 +127,30 @@ export const themes: Theme[] = [
   {
     slug: "tmnt",
     name: "TMNT",
-    image:
-      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=400&fit=crop",
+    image: "/themes/tmnt.jpg",
     color: "#1b5e20",
   },
   {
     slug: "motu",
     name: "Masters of the Universe",
-    image:
-      "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=400&fit=crop",
+    image: "/themes/motu.jpg",
     color: "#6a1b9a",
   },
+];
+
+export const brands = [
+  { name: "Funko", mark: "FUNKO", tone: "#f4b400", bg: "#111111" },
+  { name: "Hasbro", mark: "HASBRO", tone: "#ffffff", bg: "#e21b22" },
+  { name: "Mattel", mark: "MATTEL", tone: "#e31c3d", bg: "#ffffff" },
+  { name: "Bandai", mark: "BANDAI", tone: "#ffffff", bg: "#e3262e" },
+  { name: "NECA", mark: "NECA", tone: "#111827", bg: "#f3f4f6" },
+  { name: "McFarlane Toys", mark: "McFARLANE", tone: "#ffffff", bg: "#1b2f73" },
+  { name: "Mezco Toyz", mark: "MEZCO", tone: "#ffffff", bg: "#b51218" },
+  { name: "Super7", mark: "SUPER7", tone: "#111111", bg: "#ffe000" },
+  { name: "WizKids", mark: "WIZKIDS", tone: "#ffffff", bg: "#0f766e" },
+  { name: "Beast Kingdom", mark: "BEAST", tone: "#f8e287", bg: "#1a1a1a" },
+  { name: "Hiya Toys", mark: "HIYA", tone: "#111111", bg: "#e5e7eb" },
+  { name: "QMx", mark: "QMx", tone: "#ffffff", bg: "#334155" },
 ];
 
 export const banners: Banner[] = [
@@ -151,18 +160,16 @@ export const banners: Banner[] = [
     subtitle: "Transformers Generations — new wave now available",
     cta: "Shop Now",
     href: "/themes/transformers",
-    image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1400&h=520&fit=crop",
+    image: "/heroes/01-throne.jpg",
     accent: "#e11d48",
   },
   {
     id: "2",
     title: "Fresh Vinyl Drops",
-    subtitle: "Limited exclusives & chase variants this week",
+    subtitle: "Limited exclusives and chase variants this week",
     cta: "Shop Now",
     href: "/shop/vinyl-figures",
-    image:
-      "https://images.unsplash.com/photo-1608889476518-738c9b1dcb40?w=1400&h=520&fit=crop",
+    image: "/heroes/02-vinyl.jpg",
     accent: "#7c3aed",
   },
   {
@@ -171,8 +178,7 @@ export const banners: Banner[] = [
     subtitle: "Premium collective figure — collector packaging",
     cta: "Shop Now",
     href: "/shop/action-figures",
-    image:
-      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=1400&h=520&fit=crop",
+    image: "/heroes/03-mystic.jpg",
     accent: "#ca8a04",
   },
   {
@@ -181,8 +187,7 @@ export const banners: Banner[] = [
     subtitle: "S.H.Figuarts wave pre-orders open",
     cta: "Pre-Order",
     href: "/pre-orders",
-    image:
-      "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=1400&h=520&fit=crop",
+    image: "/heroes/04-armored.jpg",
     accent: "#dc2626",
   },
   {
@@ -191,8 +196,7 @@ export const banners: Banner[] = [
     subtitle: "Marvel Legends Series — wave restock",
     cta: "Shop Now",
     href: "/themes/spider-man",
-    image:
-      "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=1400&h=520&fit=crop",
+    image: "/heroes/05-acrobat.jpg",
     accent: "#b91c1c",
   },
   {
@@ -201,26 +205,43 @@ export const banners: Banner[] = [
     subtitle: "Collector Earth exclusive case packs",
     cta: "Shop Exclusive",
     href: "/exclusives",
-    image:
-      "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=1400&h=520&fit=crop",
+    image: "/heroes/06-retro.jpg",
     accent: "#1d4ed8",
+  },
+  {
+    id: "7",
+    title: "K-Pop Stage Accessories",
+    subtitle: "Hasbro collectible extras for the hottest stage drop",
+    cta: "Shop Now",
+    href: "/shop",
+    image: "/heroes/07-neon.jpg",
+    accent: "#db2777",
+  },
+  {
+    id: "8",
+    title: "G.I. Joe Classified",
+    subtitle: "Tactical 6-inch figures with premium accessories",
+    cta: "Shop Now",
+    href: "/shop/action-figures",
+    image: "/heroes/08-tactical.jpg",
+    accent: "#3f6212",
   },
 ];
 
-/** Curated Unsplash demo images (not product photography from any retailer). */
+/** Original catalog photography — isolated figures on white, EE-style. */
 const P = {
-  toys: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=600&fit=crop",
-  robots: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=600&fit=crop",
-  dark: "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=600&h=600&fit=crop",
-  comic: "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=600&h=600&fit=crop",
-  hero: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=600&h=600&fit=crop",
-  vinyl: "https://images.unsplash.com/photo-1608889476518-738c9b1dcb40?w=600&h=600&fit=crop",
-  anime: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=600&fit=crop",
-  monster: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=600&fit=crop",
-  game: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&h=600&fit=crop",
-  figures: "https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=600&h=600&fit=crop",
-  display: "https://images.unsplash.com/photo-1613376023733-0a73315d9b06?w=600&h=600&fit=crop",
-  shelf: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=600&h=600&fit=crop",
+  toys: "/products/skeletor.jpg",
+  robots: "/products/transformer.jpg",
+  dark: "/products/batman.jpg",
+  comic: "/products/heroes-pack.jpg",
+  hero: "/products/hulk.jpg",
+  vinyl: "/products/vinyl.jpg",
+  anime: "/products/replica.jpg",
+  monster: "/products/kaiju.jpg",
+  game: "/products/soldier.jpg",
+  figures: "/products/qfig.jpg",
+  display: "/products/cat.jpg",
+  shelf: "/products/dragon.jpg",
 };
 
 export const products: Product[] = [
@@ -276,6 +297,7 @@ export const products: Product[] = [
     name: "DC Multiverse Deluxe Theatrical Edition Catwoman 7-Inch Figure",
     brand: "McFarlane Toys",
     price: 34.99,
+    compareAt: 39.99,
     image: P.dark,
     category: "action-figures",
     theme: "batman",
@@ -311,6 +333,7 @@ export const products: Product[] = [
     name: "DC Super Powers Wave 15 4½-Inch Case of 6 — Exclusive",
     brand: "McFarlane Toys",
     price: 119.94,
+    compareAt: 134.94,
     image: P.comic,
     category: "exclusives",
     theme: "dc-comics",
@@ -365,6 +388,7 @@ export const products: Product[] = [
     name: "The Punisher: One Last Kill Glow-in-the-Dark Vinyl Figure #1635 — Exclusive",
     brand: "Funko",
     price: 16.99,
+    compareAt: 19.99,
     image: P.vinyl,
     category: "vinyl-figures",
     theme: "marvel",
@@ -619,6 +643,7 @@ export const products: Product[] = [
     name: "Q-Fig DC Wave 1 Clayface Batman: The Animated Series 4-Inch",
     brand: "QMx",
     price: 19.99,
+    compareAt: 24.99,
     image: P.figures,
     category: "statues",
     theme: "batman",
@@ -635,6 +660,7 @@ export const products: Product[] = [
     name: "Q-Fig DC Wave 1 Mr. Freeze Batman: The Animated Series 4-Inch",
     brand: "QMx",
     price: 19.99,
+    compareAt: 24.99,
     image: P.figures,
     category: "statues",
     theme: "batman",
@@ -796,6 +822,7 @@ export const products: Product[] = [
     name: "G.I. Joe Classified Series Action Figures Assortment",
     brand: "Hasbro",
     price: 29.99,
+    compareAt: 34.99,
     image: P.robots,
     category: "action-figures",
     theme: "transformers",
@@ -859,6 +886,10 @@ export function getPreOrders(): Product[] {
   return products.filter((p) => p.status === "pre-order");
 }
 
+export function getDeals(): Product[] {
+  return products.filter((p) => p.compareAt && p.compareAt > p.price);
+}
+
 export function searchProducts(q: string): Product[] {
   const term = q.toLowerCase().trim();
   if (!term) return products;
@@ -867,6 +898,7 @@ export function searchProducts(q: string): Product[] {
       p.name.toLowerCase().includes(term) ||
       p.brand.toLowerCase().includes(term) ||
       p.theme.toLowerCase().includes(term) ||
+      p.category.toLowerCase().includes(term) ||
       p.sku.toLowerCase().includes(term),
   );
 }

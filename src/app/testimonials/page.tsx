@@ -18,7 +18,7 @@ export default function TestimonialsPage() {
         {testimonials.map((t) => (
           <blockquote
             key={t.id}
-            className="rounded-xl border border-border bg-card p-6 shadow-sm"
+            className="border border-slate-200 bg-card p-6 shadow-sm"
           >
             <p className="text-lg leading-relaxed text-ink">“{t.quote}”</p>
             <footer className="mt-3 text-sm font-semibold text-muted">

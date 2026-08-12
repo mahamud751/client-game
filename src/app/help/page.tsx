@@ -14,17 +14,17 @@ const faqs = [
   },
   {
     id: "returns",
-    q: "What is the return policy?",
+    q: "What is the Hassle-Free 90-Day Return Policy?",
     a: "Hassle-free 90-day returns on most items in original condition. Contact support to start a return.",
   },
   {
     id: "mint",
-    q: "What is the Mint Condition Guarantee?",
+    q: "What is the Mint Condition Guarantee™?",
     a: "We pack collectibles carefully so they arrive display-ready. If packaging is damaged in transit, we’ll make it right.",
   },
   {
     id: "risk-free",
-    q: "How do pre-orders work?",
+    q: "How do pre-orders and risk-free shopping work?",
     a: "Reserve items with no deposit. Your card is only charged when the product is in stock and ready to ship.",
   },
   {
@@ -36,28 +36,24 @@ const faqs = [
 
 export default function HelpPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-4xl px-3 py-6 sm:px-5">
       <Breadcrumbs items={[{ label: "Help Center" }]} />
       <PageHeader
         title="Help Center — FAQ"
         description="Answers about shipping, returns, pre-orders, and guarantees."
       />
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {faqs.map((f) => (
-          <section
-            key={f.id}
-            id={f.id}
-            className="scroll-mt-28 rounded-xl border border-border bg-card p-5 shadow-sm"
-          >
-            <h2 className="text-lg font-bold text-ink">{f.q}</h2>
+          <section key={f.id} id={f.id} className="scroll-mt-28 border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="text-lg font-bold text-[#183a5d]">{f.q}</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">{f.a}</p>
           </section>
         ))}
       </div>
 
-      <div className="mt-10 rounded-xl bg-ink p-6 text-white">
-        <h2 className="text-lg font-bold text-brand">Still need help?</h2>
+      <div className="mt-10 bg-[#17212b] p-6 text-white">
+        <h2 className="text-lg font-bold text-[#ffe000]">Still need help?</h2>
         <ul className="mt-3 space-y-1 text-sm text-white/85">
           <li>
             Email:{" "}
@@ -65,6 +61,7 @@ export default function HelpPage() {
               {site.email}
             </a>
           </li>
+          <li>Live Chat: available from the Help Center during business hours (demo)</li>
           <li>
             Phone:{" "}
             <a href={`tel:${site.phone.replace(/-/g, "")}`} className="underline">

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { AddToCartButton } from "@/components/product/AddToCartButton";
+import { BuyBox } from "@/components/product/BuyBox";
 import { ProductCarousel } from "@/components/product/ProductCarousel";
 import {
   getProductBySlug,
@@ -50,7 +50,7 @@ export default async function ProductPage({
         : "text-amber-700";
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-[1440px] px-3 py-6 sm:px-5">
       <Breadcrumbs
         items={[
           { label: "Shop", href: "/shop" },
@@ -62,15 +62,15 @@ export default async function ProductPage({
         ]}
       />
 
-      <div className="grid gap-8 lg:grid-cols-2">
-        <div className="relative aspect-square overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+      <div className="grid gap-8 bg-white p-4 shadow-sm ring-1 ring-slate-200 lg:grid-cols-[1.05fr_.95fr] lg:p-6">
+        <div className="relative aspect-square overflow-hidden border border-slate-200 bg-white">
           <Image
             src={product.image}
             alt={product.name}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
+            className="object-contain p-4"
           />
           {product.exclusive && (
             <span className="absolute left-4 top-4 rounded bg-ink px-2 py-1 text-xs font-bold uppercase text-brand">
@@ -80,79 +80,45 @@ export default async function ProductPage({
         </div>
 
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-muted">
+          <p className="text-xs font-black uppercase tracking-[.14em] text-[#075aaa]">
             {product.brand}
           </p>
-          <h1 className="mt-1 text-2xl font-bold leading-tight text-ink sm:text-3xl">
+          <h1 className="mt-1 text-2xl font-black leading-tight text-[#17212b] sm:text-3xl">
             {product.name}
           </h1>
 
           {product.rating && (
             <p className="mt-2 text-sm text-muted">
               ★ {product.rating.toFixed(1)}
-              {product.reviewCount
-                ? ` · ${product.reviewCount} reviews`
-                : null}
+              {product.reviewCount ? ` · ${product.reviewCount} reviews` : null}
             </p>
           )}
 
           <div className="mt-4 flex items-baseline gap-3">
-            <span className="text-3xl font-black text-ink">
-              {formatPrice(product.price)}
-            </span>
+            <span className="text-3xl font-black text-[#17212b]">{formatPrice(product.price)}</span>
             {product.compareAt && product.compareAt > product.price && (
-              <span className="text-lg text-muted line-through">
-                {formatPrice(product.compareAt)}
-              </span>
+              <span className="text-lg text-muted line-through">{formatPrice(product.compareAt)}</span>
             )}
           </div>
 
           <p className={`mt-2 text-sm font-bold ${statusColor}`}>
             {statusLabel(product.status)}
-            {product.releaseDate && product.status === "pre-order"
-              ? ` · Est. ${product.releaseDate}`
-              : null}
+            {product.releaseDate && product.status === "pre-order" ? ` · Est. ${product.releaseDate}` : null}
           </p>
-
           <p className="mt-1 text-xs text-muted">SKU: {product.sku}</p>
 
-          <p className="mt-6 text-sm leading-relaxed text-ink/90">
-            {product.description}
-          </p>
+          <BuyBox product={product} />
 
-          {product.features && product.features.length > 0 && (
-            <ul className="mt-4 list-inside list-disc space-y-1 text-sm text-muted">
-              {product.features.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
-          )}
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <AddToCartButton product={product} className="min-w-[200px]" />
-            <Link
-              href="/cart"
-              className="inline-flex items-center justify-center rounded-md border border-border bg-card px-6 py-3 text-sm font-bold uppercase tracking-wide text-ink hover:bg-neutral-50"
-            >
-              View Cart
-            </Link>
-          </div>
-
-          <div className="mt-8 space-y-2 rounded-lg border border-border bg-white p-4 text-sm">
+          <div className="mt-6 space-y-2 border border-slate-200 bg-[#f7f9fb] p-4 text-sm">
             <p>
               <strong>Free shipping</strong> on orders ${site.freeShippingMin}+
             </p>
             <p>
-              <strong>Mint Condition Guarantee</strong> — collector packaging
+              <strong>Mint Condition Guarantee™</strong> — collector packaging
             </p>
             <p>
               <strong>90-day returns</strong> · hassle free
             </p>
-            {product.status === "pre-order" && (
-              <p>
-                <strong>Risk-free pre-order</strong> — charged when item ships
-              </p>
-            )}
           </div>
 
           <div className="mt-4 flex flex-wrap gap-2 text-sm">
@@ -172,13 +138,43 @@ export default async function ProductPage({
         </div>
       </div>
 
+      <div className="mt-8 grid gap-4 lg:grid-cols-3">
+        <section className="rounded-sm border border-slate-200 bg-white p-5">
+          <h2 className="border-b-2 border-[#075aaa] pb-2 text-sm font-black uppercase text-[#183a5d]">
+            Description
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-ink/90">{product.description}</p>
+          {product.features && product.features.length > 0 && (
+            <ul className="mt-3 list-inside list-disc space-y-1 text-sm text-muted">
+              {product.features.map((f) => (
+                <li key={f}>{f}</li>
+              ))}
+            </ul>
+          )}
+        </section>
+        <section className="rounded-sm border border-slate-200 bg-white p-5">
+          <h2 className="border-b-2 border-[#075aaa] pb-2 text-sm font-black uppercase text-[#183a5d]">
+            Shipping
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted">
+            Free standard shipping on orders ${site.freeShippingMin}+. Pre-orders ship as soon as warehouse stock
+            arrives. Items are packed for mint-condition delivery.
+          </p>
+        </section>
+        <section className="rounded-sm border border-slate-200 bg-white p-5">
+          <h2 className="border-b-2 border-[#075aaa] pb-2 text-sm font-black uppercase text-[#183a5d]">
+            Returns
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted">
+            Hassle-free 90-day returns on most items in original condition. Contact Help if packaging is damaged in
+            transit and we will make it right.
+          </p>
+        </section>
+      </div>
+
       {related.length > 0 && (
-        <div className="mt-12">
-          <ProductCarousel
-            title="You May Also Like"
-            products={related}
-            viewAllHref={`/themes/${product.theme}`}
-          />
+        <div className="mt-8">
+          <ProductCarousel title="You May Also Like" products={related} viewAllHref={`/themes/${product.theme}`} />
         </div>
       )}
     </div>

@@ -23,9 +23,9 @@ export function ProductCarousel({
   };
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <div className="mb-4 flex items-center justify-between gap-4">
-        <h2 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
+    <section className="mx-auto max-w-[1440px] px-3 py-6 sm:px-5">
+      <div className="mb-3 flex items-center justify-between gap-4">
+        <h2 className="text-[22px] font-bold text-[#1b2937] sm:text-[26px]">
           {title}
         </h2>
         <div className="flex items-center gap-2">
@@ -33,7 +33,7 @@ export function ProductCarousel({
             type="button"
             onClick={() => scroll(-1)}
             aria-label="Scroll left"
-            className="hidden h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-ink shadow-sm hover:bg-neutral-50 sm:flex"
+            className="hidden h-8 w-8 items-center justify-center rounded border border-slate-300 bg-card text-ink shadow-sm hover:bg-neutral-50 sm:flex"
           >
             ‹
           </button>
@@ -41,15 +41,15 @@ export function ProductCarousel({
             type="button"
             onClick={() => scroll(1)}
             aria-label="Scroll right"
-            className="hidden h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-ink shadow-sm hover:bg-neutral-50 sm:flex"
+            className="hidden h-8 w-8 items-center justify-center rounded border border-slate-300 bg-card text-ink shadow-sm hover:bg-neutral-50 sm:flex"
           >
             ›
           </button>
           <Link
             href={viewAllHref}
-            className="text-sm font-semibold text-accent hover:underline"
+            className="text-sm font-semibold text-[#075aaa] hover:underline"
           >
-            View All
+            View All {title}
           </Link>
         </div>
       </div>
@@ -60,7 +60,7 @@ export function ProductCarousel({
         {products.map((p) => (
           <div
             key={p.id}
-            className="w-[46%] shrink-0 snap-start sm:w-[30%] md:w-[22%] lg:w-[18%]"
+            className="w-[47%] shrink-0 snap-start sm:w-[30%] md:w-[22%] lg:w-[18.5%]"
           >
             <ProductCard product={p} />
           </div>

@@ -1,9 +1,10 @@
+import { BrandCarousel } from "@/components/home/BrandCarousel";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { TestimonialBlock } from "@/components/home/TestimonialBlock";
+import { HomeProductShelf } from "@/components/home/HomeProductShelf";
+import { PromoTiles } from "@/components/home/PromoTiles";
 import { ThemeGrid } from "@/components/home/ThemeGrid";
-import { TrustStrip } from "@/components/home/TrustStrip";
 import { WhyShop } from "@/components/home/WhyShop";
-import { ProductCarousel } from "@/components/product/ProductCarousel";
 import {
   banners,
   getJustAdded,
@@ -15,26 +16,27 @@ import {
 export default function HomePage() {
   return (
     <>
+      <BrandCarousel />
       <HeroCarousel banners={banners} />
-      <ProductCarousel
+      <HomeProductShelf
         title="New & Trending"
         products={getTrending()}
-        viewAllHref="/new"
+        href="/new"
       />
-      <ProductCarousel
+      <HomeProductShelf
         title="Just Added"
         products={getJustAdded()}
-        viewAllHref="/new?filter=just-added"
+        href="/new?filter=just-added"
       />
-      <ProductCarousel
+      <HomeProductShelf
         title="Ship Ready Favorites"
         products={getShipReady()}
-        viewAllHref="/shop?ready=1"
+        href="/shop?ready=1"
       />
       <ThemeGrid themes={themes} />
       <WhyShop />
+      <PromoTiles />
       <TestimonialBlock />
-      <TrustStrip />
     </>
   );
 }

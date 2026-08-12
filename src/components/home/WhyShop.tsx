@@ -23,30 +23,26 @@ const points = [
     title: "Hassle-Free 90-Day Returns",
     body: "Not thrilled? Our easy 90-day return policy has you covered.",
   },
+  {
+    title: "Built for Fans, by Fans",
+    body: "Exclusive releases, previews of the latest collectibles, and a collecting experience made by people who love this stuff too.",
+  },
 ];
 
 export function WhyShop() {
   return (
-    <section className="border-y border-border bg-white py-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <h2 className="text-center text-2xl font-bold text-ink sm:text-3xl">
-          Why Shop with Collector Earth?
-        </h2>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-muted">
-          More than a store — your destination for pop culture. Here&apos;s what
-          makes us the best place for fans and collectors.
+    <section className="home-section bg-white py-5">
+      <div>
+        <div className="section-heading"><span>Why Shop with Collector Earth?</span></div>
+        <p className="mb-3 text-xs text-[#435568]">
+          More than a store — your destination for pop culture. Discover what makes us the best place for fans and
+          collectors alike.
         </p>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="columns-1 gap-10 sm:columns-2">
           {points.map((p) => (
-            <div
-              key={p.title}
-              className="rounded-xl border border-border bg-background p-5 shadow-sm"
-            >
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand text-lg font-black text-ink">
-                ★
-              </div>
-              <h3 className="text-lg font-bold text-ink">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{p.body}</p>
+              <div key={p.title} className="mb-3 break-inside-avoid">
+              <h3 className="text-xs font-black text-[#31465c]">{p.title}</h3>
+              <p className="mt-1 text-[10px] leading-relaxed text-[#536578]">{p.body}</p>
             </div>
           ))}
         </div>

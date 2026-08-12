@@ -10,21 +10,17 @@ export const metadata = {
 
 export default function ThemesPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-[1440px] px-3 py-6 sm:px-5">
       <Breadcrumbs items={[{ label: "Popular Themes" }]} />
       <PageHeader
         title="Popular Themes"
         description="Shop by franchise — Star Wars, Marvel, Batman, Transformers, and more."
       />
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {themes.map((theme) => (
-          <Link
-            key={theme.slug}
-            href={`/themes/${theme.slug}`}
-            className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-lg"
-          >
+          <Link key={theme.slug} href={`/themes/${theme.slug}`} className="group flex flex-col items-center gap-2">
             <div
-              className="relative aspect-[4/3]"
+              className="relative aspect-square w-full overflow-hidden rounded-full border-4 border-white shadow-md ring-1 ring-slate-200"
               style={{ backgroundColor: theme.color }}
             >
               <Image
@@ -32,13 +28,10 @@ export default function ThemesPage() {
                 alt={theme.name}
                 fill
                 className="object-cover transition-transform group-hover:scale-105"
-                sizes="(max-width: 768px) 50vw, 25vw"
+                sizes="(max-width: 768px) 50vw, 16vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              <h2 className="absolute bottom-3 left-3 right-3 text-lg font-bold text-white">
-                {theme.name}
-              </h2>
             </div>
+            <h2 className="text-center text-sm font-bold text-[#243b53]">{theme.name}</h2>
           </Link>
         ))}
       </div>

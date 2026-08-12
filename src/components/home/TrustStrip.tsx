@@ -20,16 +20,17 @@ const items = [
 
 export function TrustStrip() {
   return (
-    <section className="bg-ink py-8 text-white">
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:grid-cols-3 sm:px-6">
+    <section className="border-y border-slate-300 bg-[#eef1f4] py-7 text-[#243b53]">
+      <div className="mx-auto grid max-w-[1440px] gap-px overflow-hidden border border-slate-300 bg-slate-300 px-0 sm:grid-cols-3">
         {items.map((item) => (
           <Link
             key={item.title}
             href={item.href}
-            className="rounded-lg border border-white/10 bg-white/5 p-5 transition-colors hover:bg-white/10"
+            className="bg-white p-5 text-center transition-colors hover:bg-slate-50"
           >
-            <h3 className="font-bold text-brand">{item.title}</h3>
-            <p className="mt-2 text-sm text-white/80">{item.body}</p>
+            <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#075aaa] text-xl font-black text-[#075aaa]">✓</div>
+            <h3 className="font-extrabold text-[#075aaa]">{item.title}</h3>
+            <p className="mt-2 text-sm text-muted">{item.body}</p>
           </Link>
         ))}
       </div>

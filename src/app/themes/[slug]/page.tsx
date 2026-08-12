@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { PageHeader } from "@/components/layout/PageHeader";
-import { ProductGrid } from "@/components/product/ProductGrid";
+import { CatalogListing } from "@/components/product/CatalogListing";
 import { getProductsByTheme, getTheme, themes } from "@/data/catalog";
 
 export function generateStaticParams() {
@@ -27,21 +25,12 @@ export default async function ThemePage({
   const theme = getTheme(slug);
   if (!theme) notFound();
 
-  const list = getProductsByTheme(slug);
-
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <Breadcrumbs
-        items={[
-          { label: "Themes", href: "/themes" },
-          { label: theme.name },
-        ]}
-      />
-      <PageHeader
-        title={theme.name}
-        description={`Collectibles and figures from the ${theme.name} universe.`}
-      />
-      <ProductGrid products={list} />
-    </div>
+    <CatalogListing
+      title={theme.name}
+      description={`Collectibles and figures from the ${theme.name} universe.`}
+      products={getProductsByTheme(slug)}
+      crumbs={[{ label: "Themes", href: "/themes" }, { label: theme.name }]}
+    />
   );
 }

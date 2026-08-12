@@ -3,33 +3,46 @@ import { categories, site } from "@/data/catalog";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-white/10 bg-ink text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
+    <footer className="mt-auto border-t border-[#cbd2d8] bg-[#edf0f2] text-[#52687d]">
+      <div className="mx-auto grid max-w-[920px] gap-7 px-4 py-5 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-sm font-black text-ink">
-              CE
-            </span>
-            <span className="text-lg font-black">{site.name}</span>
-          </div>
-          <p className="mt-3 text-sm text-white/70">{site.tagline}</p>
-          <p className="mt-4 text-sm text-white/60">
-            Demo storefront for client preview. Layout inspired by leading
-            collectibles retailers — original brand & sample catalog.
-          </p>
+          <h3 className="border-b border-[#cbd2d8] pb-1 text-xs font-bold">
+            Help Center — FAQ
+          </h3>
+          <ul className="mt-2 space-y-1 text-[10px]">
+            <li>
+              <Link href="/help" className="hover:text-brand hover:underline">
+                Help Center — FAQ
+              </Link>
+            </li>
+            <li>
+              <a href={`mailto:${site.email}`} className="hover:text-brand hover:underline">
+                Email Us
+              </a>
+            </li>
+            <li>
+              <Link href="/help" className="hover:text-brand hover:underline">
+                Live Chat
+              </Link>
+            </li>
+            <li>
+              <a href={`tel:${site.phone.replace(/-/g, "")}`} className="hover:text-brand hover:underline">
+                {site.phone}
+              </a>
+            </li>
+            <li className="text-[#748494]">{site.hours.weekdays}</li>
+            <li className="text-[#748494]">{site.hours.friday}</li>
+          </ul>
         </div>
 
         <div>
-          <h3 className="text-sm font-bold uppercase tracking-wider text-brand">
+          <h3 className="border-b border-[#cbd2d8] pb-1 text-xs font-bold">
             Shop
           </h3>
-          <ul className="mt-3 space-y-2 text-sm text-white/80">
+          <ul className="mt-2 space-y-1 text-[10px]">
             {categories.slice(0, 6).map((c) => (
               <li key={c.slug}>
-                <Link
-                  href={`/shop/${c.slug}`}
-                  className="hover:text-brand hover:underline"
-                >
+                <Link href={`/shop/${c.slug}`} className="hover:text-brand hover:underline">
                   {c.name}
                 </Link>
               </li>
@@ -39,48 +52,41 @@ export function Footer() {
                 Popular Themes
               </Link>
             </li>
+            <li>
+              <Link href="/deals" className="hover:text-brand hover:underline">
+                Deals & Sales
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div>
-          <h3 className="text-sm font-bold uppercase tracking-wider text-brand">
-            Help Center
+          <h3 className="border-b border-[#cbd2d8] pb-1 text-xs font-bold">
+            Customer Care
           </h3>
-          <ul className="mt-3 space-y-2 text-sm text-white/80">
+          <ul className="mt-2 space-y-1 text-[10px]">
             <li>
-              <Link href="/help" className="hover:text-brand hover:underline">
-                FAQ
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/help#shipping"
-                className="hover:text-brand hover:underline"
-              >
+              <Link href="/help#shipping" className="hover:text-brand hover:underline">
                 Shipping
               </Link>
             </li>
             <li>
-              <Link
-                href="/help#returns"
-                className="hover:text-brand hover:underline"
-              >
-                Returns
+              <Link href="/help#returns" className="hover:text-brand hover:underline">
+                Hassle-Free 90-Day Returns
               </Link>
             </li>
             <li>
-              <Link
-                href="/help#mint"
-                className="hover:text-brand hover:underline"
-              >
-                Mint Condition Guarantee
+              <Link href="/help#mint" className="hover:text-brand hover:underline">
+                Mint Condition Guarantee™
               </Link>
             </li>
             <li>
-              <Link
-                href="/testimonials"
-                className="hover:text-brand hover:underline"
-              >
+              <Link href="/help#risk-free" className="hover:text-brand hover:underline">
+                Shop Risk Free
+              </Link>
+            </li>
+            <li>
+              <Link href="/testimonials" className="hover:text-brand hover:underline">
                 Testimonials
               </Link>
             </li>
@@ -93,59 +99,64 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="text-sm font-bold uppercase tracking-wider text-brand">
-            Contact
+          <h3 className="border-b border-[#cbd2d8] pb-1 text-xs font-bold">
+            Join
           </h3>
-          <ul className="mt-3 space-y-2 text-sm text-white/80">
-            <li>
-              <a
-                href={`mailto:${site.email}`}
-                className="hover:text-brand hover:underline"
-              >
-                Email Us
-              </a>
-            </li>
-            <li>
-              <a
-                href={`tel:${site.phone.replace(/-/g, "")}`}
-                className="hover:text-brand hover:underline"
-              >
-                {site.phone}
-              </a>
-            </li>
-            <li className="text-white/60">{site.hours.weekdays}</li>
-            <li className="text-white/60">{site.hours.friday}</li>
-          </ul>
-
-          <div className="mt-6">
-            <label
-              htmlFor="footer-email"
-              className="text-sm font-bold text-brand"
-            >
-              Join — Sign-Up for Free Messages
-            </label>
-            <div className="mt-2 flex">
-              <input
-                id="footer-email"
-                type="email"
-                name="email"
-                placeholder="Email address"
-                className="w-full rounded-l-md border-0 px-3 py-2 text-sm text-ink"
-              />
-              <button
-                type="button"
-                className="rounded-r-md bg-brand px-4 text-sm font-bold text-ink hover:bg-brand-dark"
-              >
-                Join
-              </button>
-            </div>
+          <label htmlFor="footer-email" className="mt-2 block text-[10px] font-bold">
+            Sign-Up for Free Messages
+          </label>
+          <div className="mt-2 flex">
+            <input
+              id="footer-email"
+              type="email"
+              name="email"
+              placeholder="Email address"
+              className="w-full rounded-l border border-slate-300 px-2 py-1.5 text-[10px] text-ink"
+            />
+            <button type="button" className="rounded-r bg-[#075aaa] px-3 text-[10px] font-bold text-white">
+              Join
+            </button>
+          </div>
+          <label htmlFor="footer-sms" className="mt-3 block text-[10px] font-bold">
+            Sign-Up for Text Messages
+          </label>
+          <div className="mt-2 flex">
+            <input
+              id="footer-sms"
+              type="tel"
+              name="sms"
+              placeholder="Mobile number"
+              className="w-full rounded-l border border-slate-300 px-2 py-1.5 text-[10px] text-ink"
+            />
+            <button type="button" className="rounded-r bg-[#075aaa] px-3 text-[10px] font-bold text-white">
+              Join
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-4 text-center text-xs text-white/50">
-        © {new Date().getFullYear()} {site.name}. Demo e-commerce storefront.
-        Not affiliated with Entertainment Earth or any licensed brand.
+      <div className="border-t border-[#cbd2d8] bg-white">
+        <div className="mx-auto grid max-w-[920px] gap-px sm:grid-cols-3">
+          <Link href="/help#mint" className="px-5 py-5 text-center hover:bg-white/5">
+            <p className="text-xs font-black text-[#075aaa]">Mint Condition Guarantee™</p>
+            <p className="mt-1 text-[9px] text-[#6c7985]">
+              Receive a perfect item with the best packaging possible — at no extra charge.
+            </p>
+          </Link>
+          <Link href="/help#returns" className="px-5 py-5 text-center hover:bg-white/5">
+            <p className="text-xs font-black text-[#075aaa]">Hassle-Free 90-Day Returns</p>
+            <p className="mt-1 text-[9px] text-[#6c7985]">Shop with us and enjoy easy returns if you are not thrilled.</p>
+          </Link>
+          <Link href="/help#risk-free" className="px-5 py-5 text-center hover:bg-white/5">
+            <p className="text-xs font-black text-[#075aaa]">Shop Risk Free</p>
+            <p className="mt-1 text-[9px] text-[#6c7985]">We will not charge your card until items come in stock.</p>
+          </Link>
+        </div>
+      </div>
+
+      <div className="border-t border-[#cbd2d8] py-3 text-center text-[9px] text-[#748494]">
+        © {new Date().getFullYear()} {site.name}. All rights reserved. Product details and availability are subject to
+        change.
       </div>
     </footer>
   );
