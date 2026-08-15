@@ -23,11 +23,9 @@ export function ProductCarousel({
   };
 
   return (
-    <section className="container-ee py-6">
+    <section className="mt-8">
       <div className="mb-3 flex items-center justify-between gap-4">
-        <h2 className="text-[22px] font-bold text-[#1b2937] sm:text-[26px]">
-          {title}
-        </h2>
+        <h2 className="pdp-section-title">{title}</h2>
         <div className="flex items-center gap-2">
           <button
             type="button"
@@ -59,14 +57,11 @@ export function ProductCarousel({
       </div>
       <div
         ref={scroller}
-        className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
+        className="no-scrollbar flex snap-x snap-mandatory gap-[10px] overflow-x-auto pb-2"
       >
         {products.map((p) => (
-          <div
-            key={p.id}
-            className="w-[47%] shrink-0 snap-start sm:w-[30%] md:w-[22%] lg:w-[18.5%]"
-          >
-            <ProductCard product={p} />
+          <div key={p.id} className="w-[171px] shrink-0 snap-start">
+            <ProductCard product={p} variant="compact" />
           </div>
         ))}
       </div>

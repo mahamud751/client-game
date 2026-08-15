@@ -12,7 +12,14 @@ const statusColor: Record<string, string> = {
   "sold-out": "text-[#b91c1c]",
 };
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({
+  product,
+  variant = "listing",
+}: {
+  product: Product;
+  /** "compact" is the smaller product-page carousel card (171x200). */
+  variant?: "listing" | "compact";
+}) {
   const flag = product.justAdded
     ? "Hot Off\nThe Truck"
     : product.newArrival
@@ -21,63 +28,89 @@ export function ProductCard({ product }: { product: Product }) {
         ? "Exclusive"
         : null;
 
-  return (
-    <article className="product-tile">
-      <div className="relative">
-        {flag && (
-          <span className="tile-flag whitespace-pre-line">{flag}</span>
-        )}
+  if (variant === "compact") {
+    return (
+      <article className="product-tile-compact">
         <Link
           href={`/product/${product.slug}`}
-          className="block p-3"
+          className="tile-media-compact block"
           tabIndex={-1}
           aria-hidden
         >
-          <span className="relative block h-[180px] w-full">
-            <Image
-              src={product.image}
-              alt=""
-              fill
-              sizes="(max-width: 640px) 50vw, 262px"
-              className="object-contain"
-            />
-          </span>
+          <Image
+            src={product.image}
+            alt=""
+            fill
+            sizes="151px"
+            className="object-contain"
+          />
+        </Link>
+        <Link
+          href={`/product/${product.slug}`}
+          className="tile-title-compact mt-2 line-clamp-2 block"
+        >
+          {product.name}
+        </Link>
+      </article>
+    );
+  }
+
+  return (
+    <article className="product-tile">
+      <div className="relative">
+        {flag && <span className="tile-flag whitespace-pre-line">{flag}</span>}
+        <Link
+          href={`/product/${product.slug}`}
+          className="tile-media block"
+          tabIndex={-1}
+          aria-hidden
+        >
+          <Image
+            src={product.image}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 50vw, 240px"
+            className="object-contain"
+          />
         </Link>
       </div>
 
-      <div className="flex flex-1 flex-col gap-1.5 px-3 pb-3">
-        <Link href={`/product/${product.slug}`} className="tile-title line-clamp-3">
-          {product.name}
-        </Link>
+      <Link
+        href={`/product/${product.slug}`}
+        className="tile-title mt-2 line-clamp-2 block"
+      >
+        {product.name}
+      </Link>
 
-        <p className="tile-meta">Item #: {product.sku}</p>
+      <p className="tile-meta mt-1">Item #: {product.sku}</p>
 
-        <p className={`text-[13px] font-semibold ${statusColor[product.status] ?? ""}`}>
-          {statusLabel(product.status)}
-        </p>
+      <p
+        className={`text-[13px] font-semibold ${statusColor[product.status] ?? ""}`}
+      >
+        {statusLabel(product.status)}
+      </p>
 
-        <div className="mt-auto pt-1.5">
-          <div className="flex items-baseline gap-2">
-            <span className="tile-price">{formatPrice(product.price)}</span>
-            {product.compareAt && product.compareAt > product.price && (
-              <span className="text-[13px] text-[#7b8794] line-through">
-                {formatPrice(product.compareAt)}
-              </span>
-            )}
-          </div>
-
-          {product.price >= site.freeShippingMin && (
-            <p className="mt-0.5 text-[12px] font-semibold text-[#15803d]">
-              Free USA Shipping
-            </p>
+      <div className="mt-auto pt-1">
+        <div className="flex items-baseline gap-2">
+          <span className="tile-price">{formatPrice(product.price)}</span>
+          {product.compareAt && product.compareAt > product.price && (
+            <span className="text-[13px] text-[#7b8794] line-through">
+              {formatPrice(product.compareAt)}
+            </span>
           )}
-
-          <AddToCartButton
-            product={product}
-            variant="tile"
-            className="tile-cart mt-2"
-          />
         </div>
+
+        {product.price >= site.freeShippingMin && (
+          <p className="text-[12px] font-semibold text-[#15803d]">
+            Free USA Shipping
+          </p>
+        )}
+
+        <AddToCartButton
+          product={product}
+          variant="tile"
+          className="tile-cart mt-1.5"
+        />
       </div>
     </article>
   );

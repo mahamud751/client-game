@@ -102,7 +102,7 @@ export function Header() {
       key: "company",
       label: "Company",
       items: brands.map((b) => ({
-        href: `/search?q=${encodeURIComponent(b.name)}`,
+        href: `/company/${b.slug}`,
         label: b.name,
         image: b.image,
         count: b.count,

@@ -505,15 +505,80 @@ h1 {
   color: #34495e;
 }
 
-/* Product tile */
+/* Product tile — listing pages. Reference: 262x356, 10px pad, 180x180 image. */
 .product-tile {
   display: flex;
   flex-direction: column;
   border: 1px solid #ddd;
   background: #fff;
+  padding: 10px;
+}
+@media (min-width: 768px) {
+  .product-tile {
+    height: 356px;
+  }
 }
 .product-tile:hover {
   box-shadow: 0 4px 14px rgba(18, 39, 61, 0.16);
+}
+/* Fixed 180px-tall image band; the image itself is capped at 180x180. */
+.tile-media {
+  position: relative;
+  height: 180px;
+  width: 100%;
+  flex: none;
+}
+
+/* Shelf tile — home page rows. Reference: 182x312, 10px pad, 160x160 image. */
+.product-tile-shelf {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 10px;
+}
+@media (min-width: 768px) {
+  .product-tile-shelf {
+    height: 312px;
+  }
+}
+.product-tile-shelf:hover {
+  box-shadow: 0 4px 14px rgba(18, 39, 61, 0.16);
+}
+.tile-media-shelf {
+  position: relative;
+  height: 160px;
+  width: 100%;
+  flex: none;
+}
+.tile-title-shelf {
+  color: #34495e;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+}
+.tile-title-shelf:hover {
+  color: #075aaa;
+  text-decoration: underline;
+}
+
+/* Compact tile — product-page carousels. Reference: 171x200, 125x125 image. */
+.product-tile-compact {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 10px;
+}
+.product-tile-compact:hover {
+  box-shadow: 0 4px 14px rgba(18, 39, 61, 0.16);
+}
+.tile-media-compact {
+  position: relative;
+  height: 125px;
+  width: 100%;
+  flex: none;
 }
 .tile-flag {
   position: absolute;
@@ -529,11 +594,23 @@ h1 {
   text-transform: uppercase;
 }
 .tile-title {
-  color: #075aaa;
-  font-size: 14px;
-  line-height: 18px;
+  color: #34495e;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 20px;
 }
 .tile-title:hover {
+  color: #075aaa;
+  text-decoration: underline;
+}
+/* Compact-tile title — reference: 14px/700 #003366, 20px line-height. */
+.tile-title-compact {
+  color: #003366;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+.tile-title-compact:hover {
   text-decoration: underline;
 }
 .tile-meta {
@@ -545,18 +622,287 @@ h1 {
   font-size: 20px;
   font-weight: 700;
 }
+/* Reference: 240x33, #008800, 15px, radius 4. */
 .tile-cart {
+  display: flex;
   width: 100%;
-  border-radius: 3px;
-  background: #075aaa;
-  padding: 7px;
+  height: 33px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: #008800;
   color: #fff;
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 400;
+}
+.tile-cart:hover:not(:disabled) {
+  background: #026e02;
+}
+
+/* ---------------------------------------------------------------
+   Product detail page
+   --------------------------------------------------------------- */
+.pdp-grid {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+@media (min-width: 1024px) {
+  .pdp-grid {
+    grid-template-columns: minmax(0, 585px) 555px;
+    gap: 0;
+  }
+}
+.pdp-title {
+  color: #003366;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+@media (max-width: 640px) {
+  .pdp-title {
+    font-size: 24px;
+  }
+}
+.pdp-subtitle {
+  margin-top: 6px;
+  color: #34495e;
+  font-size: 17px;
+  font-weight: 400;
+}
+.pdp-subtitle a:hover {
+  color: #075aaa;
+  text-decoration: underline;
+}
+.pdp-section-title {
+  color: #34495e;
+  font-size: 24px;
+  font-weight: 400;
+}
+.pdp-eta-label {
+  color: #34495e;
+  font-size: 14px;
+}
+.pdp-eta {
+  color: #003366;
+  font-size: 22px;
   font-weight: 700;
   text-transform: uppercase;
 }
-.tile-cart:hover {
-  background: #064c91;
+.pdp-buy-btn {
+  display: flex;
+  width: 100%;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: #008800;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+}
+.pdp-buy-btn:hover:not(:disabled) {
+  background: #026e02;
+}
+.pdp-buy-btn:disabled {
+  background: #9aa3ab;
+  cursor: not-allowed;
+}
+@media (max-width: 640px) {
+  .pdp-buy-btn {
+    font-size: 20px;
+  }
+}
+.pdp-link {
+  color: #075aaa;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.pdp-link:hover {
+  text-decoration: underline;
+}
+.pdp-note {
+  color: #5e656e;
+  font-size: 13px;
+  line-height: 19px;
+}
+.pdp-thumb {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+.pdp-thumb[aria-current="true"] {
+  border-color: #075aaa;
+  box-shadow: 0 0 0 1px #075aaa inset;
+}
+.pdp-rel-title {
+  color: #003366;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+}
+.pdp-rel-title:hover {
+  text-decoration: underline;
+}
+.pdp-spec-row {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid #e8ebee;
+  padding: 8px 0;
+  font-size: 14px;
+}
+.pdp-spec-key {
+  width: 190px;
+  flex: none;
+  color: #5e656e;
+}
+.pdp-spec-val {
+  color: #34495e;
+}
+
+/* ---------------------------------------------------------------
+   Added-to-cart modal
+   --------------------------------------------------------------- */
+.atc-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  padding: 30px 10px;
+}
+.atc-dialog {
+  width: 100%;
+  max-width: 580px;
+  margin-inline: auto;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+.atc-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 57px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #e5e5e5;
+  padding: 5px 15px;
+}
+.atc-title {
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+}
+.atc-close {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 35px;
+  height: 48px;
+  color: #000;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.35;
+}
+.atc-close:hover {
+  opacity: 0.7;
+}
+.atc-body {
+  padding: 15px;
+}
+.atc-added {
+  color: #34495e;
+  font-size: 16px;
+}
+.atc-prod-title {
+  display: block;
+  margin-top: 4px;
+  color: #075aaa;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+}
+.atc-prod-title:hover {
+  text-decoration: underline;
+}
+.atc-price {
+  margin-top: 6px;
+  color: #d54215;
+  font-size: 17px;
+  font-weight: 700;
+}
+.atc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
+.atc-btn-cart {
+  background: #d54215;
+}
+.atc-btn-cart:hover {
+  background: #b8380f;
+}
+.atc-btn-checkout {
+  background: #008800;
+}
+.atc-btn-checkout:hover {
+  background: #026e02;
+}
+.atc-btn-keep {
+  width: 300px;
+  max-width: 100%;
+  background: #003366;
+}
+.atc-btn-keep:hover {
+  background: #00284f;
+}
+.atc-related-title {
+  color: #34495e;
+  font-size: 20px;
+  font-weight: 400;
+}
+.atc-rel-arrow {
+  width: 24px;
+  color: #ccc;
+  font-size: 48px;
+  line-height: 1;
+}
+.atc-rel-arrow:hover {
+  color: #999;
+}
+.atc-rel-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.atc-rel-title {
+  color: #34495e;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+}
+.atc-rel-title:hover {
+  text-decoration: underline;
+}
+.atc-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d3d3d3;
+}
+.atc-dot[aria-current="true"] {
+  background: #8a8a8a;
 }
 
 /* ---------------------------------------------------------------

@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import type { CartItem, Product } from "@/lib/types";
+import { AddedToCartModal } from "./AddedToCartModal";
 
 interface CartContextValue {
   items: CartItem[];
@@ -27,6 +28,11 @@ const STORAGE_KEY = "collector-earth-cart";
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
+  /** Most recent add — drives the "Added To Cart" confirmation modal. */
+  const [lastAdded, setLastAdded] = useState<{
+    product: Product;
+    qty: number;
+  } | null>(null);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -47,6 +53,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items, hydrated]);
 
   const addItem = useCallback((product: Product, qty = 1) => {
+    setLastAdded({ product, qty });
     setItems((prev) => {
       const existing = prev.find((i) => i.product.id === product.id);
       if (existing) {
@@ -85,7 +92,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return { items, itemCount, subtotal, addItem, removeItem, updateQty, clear };
   }, [items, addItem, removeItem, updateQty, clear]);
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider value={value}>
+      {children}
+      {lastAdded && (
+        <AddedToCartModal
+          product={lastAdded.product}
+          qty={lastAdded.qty}
+          itemCount={value.itemCount}
+          onClose={() => setLastAdded(null)}
+        />
+      )}
+    </CartContext.Provider>
+  );
 }
 
 export function useCart() {

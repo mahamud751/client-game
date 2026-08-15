@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { CatalogListing } from "@/components/product/CatalogListing";
-import { categories, getCategory, getProductsByCategory } from "@/data/catalog";
+import { categories, getCategory, getCategoryProducts } from "@/data/catalog";
 
 export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
@@ -27,11 +27,13 @@ export default async function CategoryPage({
 
   return (
     <CatalogListing
-      title={cat.name}
+      title={`Shop ${cat.name}`}
       heading={`${cat.name} & Collectibles`}
+      tagline={cat.tagline}
       description={cat.description}
-      products={getProductsByCategory(category)}
+      products={getCategoryProducts(category)}
       crumbs={[{ label: "Shop", href: "/shop" }, { label: cat.name }]}
+      banner={{ src: cat.banner, alt: cat.name, title: cat.name }}
     />
   );
 }

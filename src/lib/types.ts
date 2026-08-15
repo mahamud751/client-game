@@ -31,6 +31,9 @@ export interface Category {
   description: string;
   count: number;
   image: string;
+  /** Wide full-bleed listing banner (2250x250 / 9:1), same treatment as themes. */
+  banner: string;
+  tagline: string;
 }
 
 export interface ThemeFacet {
@@ -55,12 +58,17 @@ export interface Theme {
 }
 
 export interface Brand {
+  slug: string;
   name: string;
   mark: string;
   tone: string;
   bg: string;
   image: string;
   count: number;
+  /** Wide full-bleed listing banner (2250x250 / 9:1), same treatment as themes. */
+  banner: string;
+  tagline: string;
+  description: string;
 }
 
 export interface Banner {

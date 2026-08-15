@@ -7,7 +7,7 @@ import { CarouselArrow } from "@/components/ui/CarouselArrow";
 const brandMarks: { name: string; href: string; src: string }[] = [
   { name: "New & Trending", href: "/new", src: "/brands/new-trending.svg" },
   { name: "Exclusives", href: "/exclusives", src: "/brands/exclusives.svg" },
-  { name: "Funko", href: "/search?q=Funko", src: "/brands/funko.svg" },
+  { name: "Funko", href: "/company/funko", src: "/brands/funko.svg" },
   { name: "Transformers", href: "/themes/transformers", src: "/brands/transformers.svg" },
   { name: "Star Wars", href: "/themes/star-wars", src: "/brands/star-wars.svg" },
   { name: "Marvel", href: "/themes/marvel", src: "/brands/marvel.svg" },

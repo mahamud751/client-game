@@ -17,58 +17,75 @@ export const categories: Category[] = [
   {
     slug: "action-figures",
     name: "Action Figures",
-    description: "Premium 6\"–7\" scale figures from top brands.",
+    description:
+      "Shop action figures across every scale — 3¾-inch retro carded figures, 6-inch collector lines, and 7-inch super-articulated releases with full accessory sets.",
     count: 1240,
     image: "/products/skeletor.jpg",
+    banner: "/categories/banners/action-figures.svg",
+    tagline: "Poseable heroes and villains.",
   },
   {
     slug: "vinyl-figures",
     name: "Vinyl Figures",
-    description: "Pop-style vinyls, exclusives, and chases.",
+    description: "Shop stylized vinyl figures, chase variants, and collector exclusives in window-box packaging built for display.",
     count: 890,
     image: "/products/vinyl.jpg",
+    banner: "/categories/banners/vinyl-figures.svg",
+    tagline: "Stylized vinyl for every shelf.",
   },
   {
     slug: "statues",
     name: "Statues & Busts",
-    description: "Display-ready statues and premium busts.",
+    description: "Shop hand-painted resin statues and busts in 1:10 and 1:6 art scale, including limited edition runs and diorama bases.",
     count: 320,
     image: "/products/cat.jpg",
+    banner: "/categories/banners/statues.svg",
+    tagline: "Display-ready centerpieces.",
   },
   {
     slug: "model-kits",
     name: "Model Kits",
-    description: "Gunpla, mecha, and display kits.",
+    description: "Shop snap-together and glue kits, mecha model lines, and display kits complete with decals and stands.",
     count: 410,
     image: "/products/transformer.jpg",
+    banner: "/categories/banners/model-kits.svg",
+    tagline: "Build it yourself.",
   },
   {
     slug: "games-minis",
     name: "Games & Miniatures",
-    description: "Tabletop minis, boosters, and boxed sets.",
+    description: "Shop booster bricks, boxed miniatures, blind-box cases, and pre-painted minis for your tabletop campaigns.",
     count: 560,
     image: "/products/dragon.jpg",
+    banner: "/categories/banners/games-minis.svg",
+    tagline: "Tabletop-ready miniatures.",
   },
   {
     slug: "replicas",
     name: "Prop Replicas",
-    description: "Life-size and scale prop replicas.",
+    description: "Shop scaled and life-size prop replicas with weathered finishes, display bases, and certificates of authenticity.",
     count: 145,
     image: "/products/replica.jpg",
+    banner: "/categories/banners/replicas.svg",
+    tagline: "Screen-accurate detail.",
   },
   {
     slug: "exclusives",
     name: "Exclusives",
-    description: "Collector Earth exclusives and limited runs.",
+    description: "Shop exclusives you will not find anywhere else — limited allocations, special deco, and collector-only variants.",
     count: 98,
     image: "/products/heroes-pack.jpg",
+    banner: "/categories/banners/exclusives.svg",
+    tagline: "Only at Collector Earth.",
   },
   {
     slug: "pre-orders",
     name: "Pre-Orders",
-    description: "Reserve upcoming releases — no deposit required.",
+    description: "Reserve upcoming releases with no deposit required. Pay only when your item is ready to ship.",
     count: 210,
     image: "/products/soldier.jpg",
+    banner: "/categories/banners/pre-orders.svg",
+    tagline: "Reserve it before it ships.",
   },
 ];
 
@@ -353,100 +370,148 @@ export const themes: Theme[] = [
 
 export const brands: Brand[] = [
   {
+    slug: "funko",
     name: "Funko",
     mark: "FUNKO",
     tone: "#f4b400",
     bg: "#111111",
     image: "/products/vinyl.jpg",
     count: 1860,
+    banner: "/companies/banners/funko.svg",
+    tagline: "Pop culture, in vinyl.",
+    description: "Shop Funko vinyl figures, chases, and specialty-series exclusives spanning every fandom on the shelf.",
   },
   {
+    slug: "hasbro",
     name: "Hasbro",
     mark: "HASBRO",
     tone: "#ffffff",
     bg: "#e21b22",
     image: "/products/transformer.jpg",
     count: 1540,
+    banner: "/companies/banners/hasbro.svg",
+    tagline: "Icons at collector scale.",
+    description: "Shop Hasbro collector lines — 6-inch premium figures, retro collections, and accessory sets built for display.",
   },
   {
+    slug: "mattel",
     name: "Mattel",
     mark: "MATTEL",
     tone: "#e31c3d",
     bg: "#ffffff",
     image: "/products/skeletor.jpg",
     count: 980,
+    banner: "/companies/banners/mattel.svg",
+    tagline: "Classic lines, modern deco.",
+    description: "Shop Mattel collector figures and playsets, from flagship relaunches to exclusive convention deco.",
   },
   {
+    slug: "bandai",
     name: "Bandai",
     mark: "BANDAI",
     tone: "#ffffff",
     bg: "#e3262e",
     image: "/products/replica.jpg",
     count: 720,
+    banner: "/companies/banners/bandai.svg",
+    tagline: "Kits and premium figures.",
+    description: "Shop Bandai model kits and high-articulation figures with effect parts, decals, and display stands.",
   },
   {
+    slug: "neca",
     name: "NECA",
     mark: "NECA",
     tone: "#111827",
     bg: "#f3f4f6",
     image: "/products/kaiju.jpg",
     count: 410,
+    banner: "/companies/banners/neca.svg",
+    tagline: "Detail-obsessed figures.",
+    description: "Shop NECA 7-inch scale figures with sculpted detail, deep accessory counts, and collector window boxes.",
   },
   {
+    slug: "mcfarlane-toys",
     name: "McFarlane Toys",
     mark: "McFARLANE",
     tone: "#ffffff",
     bg: "#1b2f73",
     image: "/products/heroes-pack.jpg",
     count: 860,
+    banner: "/companies/banners/mcfarlane-toys.svg",
+    tagline: "Sculpt-first collectibles.",
+    description: "Shop McFarlane Toys figures and statues known for dynamic sculpts, deluxe deco, and collector packaging.",
   },
   {
+    slug: "mezco-toyz",
     name: "Mezco Toyz",
     mark: "MEZCO",
     tone: "#ffffff",
     bg: "#b51218",
     image: "/products/hulk.jpg",
     count: 245,
+    banner: "/companies/banners/mezco-toyz.svg",
+    tagline: "Premium tailored figures.",
+    description: "Shop Mezco Toyz collective figures with tailored fabric outfits, swappable portraits, and premium stands.",
   },
   {
+    slug: "super7",
     name: "Super7",
     mark: "SUPER7",
     tone: "#111111",
     bg: "#ffe000",
     image: "/products/qfig.jpg",
     count: 190,
+    banner: "/companies/banners/super7.svg",
+    tagline: "Retro styling, modern quality.",
+    description: "Shop Super7 figures and vinyls that pair throwback styling with modern sculpting and paint.",
   },
   {
+    slug: "wizkids",
     name: "WizKids",
     mark: "WIZKIDS",
     tone: "#ffffff",
     bg: "#0f766e",
     image: "/products/dragon.jpg",
     count: 530,
+    banner: "/companies/banners/wizkids.svg",
+    tagline: "Miniatures for the table.",
+    description: "Shop WizKids pre-painted miniatures, booster bricks, and gargantuan boxed pieces for tabletop play.",
   },
   {
+    slug: "beast-kingdom",
     name: "Beast Kingdom",
     mark: "BEAST",
     tone: "#f8e287",
     bg: "#1a1a1a",
     image: "/products/soldier.jpg",
     count: 165,
+    banner: "/companies/banners/beast-kingdom.svg",
+    tagline: "Dynamic display pieces.",
+    description: "Shop Beast Kingdom figures, dioramas, and convention exclusives designed as display centerpieces.",
   },
   {
+    slug: "hiya-toys",
     name: "Hiya Toys",
     mark: "HIYA",
     tone: "#111111",
     bg: "#e5e7eb",
     image: "/products/kaiju.jpg",
     count: 210,
+    banner: "/companies/banners/hiya-toys.svg",
+    tagline: "1:18 scale specialists.",
+    description: "Shop Hiya Toys figures and vehicles in compact collector scale with sharp deco and accessory packs.",
   },
   {
+    slug: "qmx",
     name: "QMx",
     mark: "QMx",
     tone: "#ffffff",
     bg: "#334155",
     image: "/products/cat.jpg",
     count: 128,
+    banner: "/companies/banners/qmx.svg",
+    tagline: "Fandom design goods.",
+    description: "Shop QMx replicas, figures, and design-forward collectibles built from screen-accurate references.",
   },
 ];
 
@@ -1518,10 +1583,61 @@ export const products: Product[] = [
       "Large-scale diorama statue with destructible-city base and LED-ready cavity.",
     releaseDate: "2027-01-22",
   },
+
+  /* ---- Super7 ---- */
+  {
+    id: "p56",
+    slug: "retro-wave-warlord-figure",
+    name: "Masters of the Universe Retro Wave Warlord 7-Inch Action Figure",
+    brand: "Super7",
+    price: 44.99,
+    image: P.toys,
+    category: "action-figures",
+    theme: "motu",
+    status: "in-stock",
+    shipReady: true,
+    newArrival: true,
+    rating: 4.7,
+    reviewCount: 35,
+    sku: "CE-S7-RW-056",
+    description:
+      "Retro-styled 7-inch figure with vintage-inspired deco, cloth cape, and accessory set.",
+    features: ["Vintage-style deco", "Cloth cape", "Collector card back"],
+  },
+  {
+    id: "p57",
+    slug: "retro-kaiju-glow-vinyl",
+    name: "Godzilla Retro Kaiju Glow-in-the-Dark Vinyl Figure",
+    brand: "Super7",
+    price: 59.99,
+    compareAt: 69.99,
+    image: P.monster,
+    category: "vinyl-figures",
+    theme: "godzilla",
+    status: "in-stock",
+    shipReady: true,
+    exclusive: true,
+    justAdded: true,
+    rating: 4.6,
+    reviewCount: 22,
+    sku: "CE-S7-RK-057",
+    description:
+      "Soft vinyl kaiju figure with glow-in-the-dark deco and retro-style header card.",
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
+}
+
+/**
+ * "pre-orders" and "exclusives" are status/flag collections rather than real
+ * `category` values, so resolve them off the flag instead of the field.
+ */
+export function getCategoryProducts(slug: string): Product[] {
+  if (slug === "pre-orders") return products.filter((p) => p.status === "pre-order");
+  if (slug === "exclusives") return products.filter((p) => p.exclusive);
+  return getProductsByCategory(slug);
 }
 
 export function getProductsByCategory(category: string): Product[] {
@@ -1575,6 +1691,16 @@ export function getCategory(slug: string): Category | undefined {
 
 export function getTheme(slug: string): Theme | undefined {
   return themes.find((t) => t.slug === slug);
+}
+
+export function getBrand(slug: string): Brand | undefined {
+  return brands.find((b) => b.slug === slug);
+}
+
+export function getProductsByBrand(slug: string): Product[] {
+  const brand = getBrand(slug);
+  if (!brand) return [];
+  return products.filter((p) => p.brand === brand.name);
 }
 
 export const navLinks = [
