@@ -28,6 +28,7 @@ export default async function CategoryPage({
   return (
     <CatalogListing
       title={cat.name}
+      heading={`${cat.name} & Collectibles`}
       description={cat.description}
       products={getProductsByCategory(category)}
       crumbs={[{ label: "Shop", href: "/shop" }, { label: cat.name }]}

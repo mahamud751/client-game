@@ -50,7 +50,7 @@ export default async function ProductPage({
         : "text-amber-700";
 
   return (
-    <div className="mx-auto max-w-[1440px] px-3 py-6 sm:px-5">
+    <div className="container-ee py-6">
       <Breadcrumbs
         items={[
           { label: "Shop", href: "/shop" },

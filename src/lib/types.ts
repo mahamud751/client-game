@@ -30,13 +30,37 @@ export interface Category {
   name: string;
   description: string;
   count: number;
+  image: string;
+}
+
+export interface ThemeFacet {
+  id: string;
+  label: string;
+  keywords: string[];
 }
 
 export interface Theme {
   slug: string;
   name: string;
   image: string;
+  /** Wide listing-page banner (EE-style 1140×~200 header). */
+  banner: string;
   color: string;
+  count: number;
+  tagline: string;
+  description: string;
+  subthemes?: ThemeFacet[];
+  collections?: ThemeFacet[];
+  characters?: ThemeFacet[];
+}
+
+export interface Brand {
+  name: string;
+  mark: string;
+  tone: string;
+  bg: string;
+  image: string;
+  count: number;
 }
 
 export interface Banner {

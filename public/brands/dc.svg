@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <circle cx="64" cy="64" r="64" fill="#0476bc"/>
+  <circle cx="64" cy="64" r="28" fill="none" stroke="#fff" stroke-width="5"/>
+  <text x="64" y="72" text-anchor="middle" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="22" font-weight="900">DC</text>
+</svg>

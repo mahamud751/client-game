@@ -7,9 +7,12 @@ import { useCart } from "@/components/cart/CartProvider";
 export function AddToCartButton({
   product,
   className = "",
+  variant = "default",
 }: {
   product: Product;
   className?: string;
+  /** "tile" renders the compact listing-card button (styling comes from .tile-cart). */
+  variant?: "default" | "tile";
 }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
@@ -27,11 +30,15 @@ export function AddToCartButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-bold uppercase tracking-wide transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
-        added
-          ? "bg-success text-white"
-          : "bg-brand text-ink hover:bg-brand-dark"
-      } ${className}`}
+      className={
+        variant === "tile"
+          ? `${className} ${added ? "!bg-[#15803d]" : ""} disabled:cursor-not-allowed disabled:opacity-50`
+          : `inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-bold uppercase tracking-wide transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+              added
+                ? "bg-success text-white"
+                : "bg-brand text-ink hover:bg-brand-dark"
+            } ${className}`
+      }
     >
       {disabled
         ? "Sold Out"

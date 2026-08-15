@@ -53,7 +53,7 @@ export function SearchBox({
   };
 
   return (
-    <div ref={wrap} className={`relative ${compact ? "w-full" : "mx-auto min-w-0 flex-1 max-w-[680px]"}`}>
+    <div ref={wrap} className={`relative ${compact ? "w-full" : "min-w-0 flex-1"}`}>
       <form onSubmit={onSearch} className="flex">
         <label htmlFor={compact ? "site-search-m" : "site-search"} className="sr-only">
           Search products
@@ -81,15 +81,15 @@ export function SearchBox({
             }
             if (e.key === "Escape") setOpen(false);
           }}
-          placeholder="Search over 10,000 collectibles"
-          className={`w-full border-2 border-r-0 border-[#afbac5] bg-white px-4 text-sm outline-none transition focus:border-[#075aaa] ${
-            compact ? "h-10 rounded-l" : "h-11 rounded-l-md"
+          placeholder="Search"
+          className={`w-full border border-r-0 border-[#c4c4c4] bg-white px-3 text-[14px] outline-none transition focus:border-[#075aaa] ${
+            compact ? "h-9 rounded-l" : "h-8 rounded-l"
           }`}
         />
         <button
           type="submit"
-          className={`grid place-items-center bg-[#075aaa] text-white hover:bg-[#064c91] ${
-            compact ? "h-10 w-12 rounded-r" : "h-11 w-14 rounded-r-md"
+          className={`grid shrink-0 place-items-center rounded-r bg-[#075aaa] text-white hover:bg-[#064c91] ${
+            compact ? "h-9 w-11" : "h-8 w-11"
           }`}
           aria-label="Search"
         >

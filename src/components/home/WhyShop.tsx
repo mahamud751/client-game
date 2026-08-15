@@ -33,7 +33,7 @@ export function WhyShop() {
   return (
     <section className="home-section bg-white py-5">
       <div>
-        <div className="section-heading"><span>Why Shop with Collector Earth?</span></div>
+        <h2 className="section-heading">Why Shop with Collector Earth?</h2>
         <p className="mb-3 text-xs text-[#435568]">
           More than a store — your destination for pop culture. Discover what makes us the best place for fans and
           collectors alike.

@@ -21,7 +21,7 @@ const items = [
 export function TrustStrip() {
   return (
     <section className="border-y border-slate-300 bg-[#eef1f4] py-7 text-[#243b53]">
-      <div className="mx-auto grid max-w-[1440px] gap-px overflow-hidden border border-slate-300 bg-slate-300 px-0 sm:grid-cols-3">
+      <div className="container-ee grid gap-px overflow-hidden border border-slate-300 bg-slate-300 sm:grid-cols-3">
         {items.map((item) => (
           <Link
             key={item.title}

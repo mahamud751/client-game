@@ -14,7 +14,7 @@ export function CartView() {
   const remaining = Math.max(0, site.freeShippingMin - subtotal);
 
   return (
-    <div className="mx-auto max-w-[1440px] px-3 py-6 sm:px-5">
+    <div className="container-ee py-6">
       <Breadcrumbs items={[{ label: "Cart" }]} />
       <PageHeader
         title="Your Cart"

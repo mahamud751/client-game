@@ -13,7 +13,11 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const theme = getTheme(slug);
-  return { title: theme?.name ?? "Theme" };
+  if (!theme) return { title: "Theme" };
+  return {
+    title: `Hot ${theme.name} Toys & Action Figures`,
+    description: `Shop ${theme.name} action figures, vinyl figures, statues, and collectibles.`,
+  };
 }
 
 export default async function ThemePage({
@@ -25,12 +29,22 @@ export default async function ThemePage({
   const theme = getTheme(slug);
   if (!theme) notFound();
 
+  const products = getProductsByTheme(slug);
+
   return (
     <CatalogListing
-      title={theme.name}
-      description={`Collectibles and figures from the ${theme.name} universe.`}
-      products={getProductsByTheme(slug)}
-      crumbs={[{ label: "Themes", href: "/themes" }, { label: theme.name }]}
+      title={`Hot ${theme.name} Toys`}
+      heading={`${theme.name} Action Figures & Collectibles`}
+      tagline={theme.tagline}
+      description={theme.description}
+      products={products}
+      crumbs={[{ label: theme.name }]}
+      banner={{ src: theme.banner, alt: theme.name, title: theme.name }}
+      themeFacets={{
+        themes: theme.subthemes,
+        collections: theme.collections,
+        characters: theme.characters,
+      }}
     />
   );
 }

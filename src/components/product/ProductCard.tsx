@@ -2,67 +2,81 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { formatPrice, statusLabel } from "@/lib/format";
+import { AddToCartButton } from "./AddToCartButton";
+import { site } from "@/data/catalog";
+
+const statusColor: Record<string, string> = {
+  "in-stock": "text-[#15803d]",
+  "pre-order": "text-[#075aaa]",
+  backorder: "text-amber-700",
+  "sold-out": "text-[#b91c1c]",
+};
 
 export function ProductCard({ product }: { product: Product }) {
-  const statusColor =
-    product.status === "in-stock"
-      ? "text-success"
-      : product.status === "pre-order"
-        ? "text-accent"
-        : product.status === "sold-out"
-          ? "text-danger"
-          : "text-amber-700";
+  const flag = product.justAdded
+    ? "Hot Off\nThe Truck"
+    : product.newArrival
+      ? "Newly\nAdded"
+      : product.exclusive
+        ? "Exclusive"
+        : null;
 
   return (
-    <article className="group flex h-full flex-col bg-white">
-      <Link href={`/product/${product.slug}`} className="relative block">
-        <div className="relative aspect-square overflow-hidden bg-white">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-            className="object-contain p-3"
-          />
-          <div className="absolute left-2 top-2 flex flex-col gap-1">
-            {product.exclusive && (
-              <span className="rounded bg-ink px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand">
-                Exclusive
-              </span>
-            )}
-            {product.status === "pre-order" && (
-              <span className="rounded bg-accent px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                Pre-Order
-              </span>
-            )}
-            {product.newArrival && product.status !== "pre-order" && (
-              <span className="rounded bg-brand px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ink">
-                New
-              </span>
-            )}
-          </div>
-        </div>
-      </Link>
-      <div className="flex flex-1 flex-col gap-1 border-t border-slate-100 px-2 pb-3 pt-2">
-        <Link href={`/product/${product.slug}`}>
-          <h3 className="line-clamp-3 min-h-[3.4rem] text-[13px] font-semibold leading-snug text-[#075aaa] hover:underline">
-            {product.name}
-          </h3>
+    <article className="product-tile">
+      <div className="relative">
+        {flag && (
+          <span className="tile-flag whitespace-pre-line">{flag}</span>
+        )}
+        <Link
+          href={`/product/${product.slug}`}
+          className="block p-3"
+          tabIndex={-1}
+          aria-hidden
+        >
+          <span className="relative block h-[180px] w-full">
+            <Image
+              src={product.image}
+              alt=""
+              fill
+              sizes="(max-width: 640px) 50vw, 262px"
+              className="object-contain"
+            />
+          </span>
         </Link>
-        <div className="mt-auto flex items-end justify-between gap-2 pt-2">
-          <div>
-            <p className="text-lg font-black text-[#1d2936]">
-              {formatPrice(product.price)}
-            </p>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-1.5 px-3 pb-3">
+        <Link href={`/product/${product.slug}`} className="tile-title line-clamp-3">
+          {product.name}
+        </Link>
+
+        <p className="tile-meta">Item #: {product.sku}</p>
+
+        <p className={`text-[13px] font-semibold ${statusColor[product.status] ?? ""}`}>
+          {statusLabel(product.status)}
+        </p>
+
+        <div className="mt-auto pt-1.5">
+          <div className="flex items-baseline gap-2">
+            <span className="tile-price">{formatPrice(product.price)}</span>
             {product.compareAt && product.compareAt > product.price && (
-              <p className="text-xs text-muted line-through">
+              <span className="text-[13px] text-[#7b8794] line-through">
                 {formatPrice(product.compareAt)}
-              </p>
+              </span>
             )}
           </div>
-          <p className={`text-[11px] font-semibold ${statusColor}`}>
-            {statusLabel(product.status)}
-          </p>
+
+          {product.price >= site.freeShippingMin && (
+            <p className="mt-0.5 text-[12px] font-semibold text-[#15803d]">
+              Free USA Shipping
+            </p>
+          )}
+
+          <AddToCartButton
+            product={product}
+            variant="tile"
+            className="tile-cart mt-2"
+          />
         </div>
       </div>
     </article>

@@ -4,7 +4,7 @@ import type { Theme } from "@/lib/types";
 export function ThemeGrid({ themes }: { themes: Theme[] }) {
   return (
     <section className="home-section">
-      <div className="section-heading"><span>Popular Themes</span></div>
+      <h2 className="section-heading">Popular Themes</h2>
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
         {themes.map((theme) => (
           <Link key={theme.slug} href={`/themes/${theme.slug}`} className="group flex h-[165px] flex-col justify-between border border-[#d9dde1] bg-white p-3">

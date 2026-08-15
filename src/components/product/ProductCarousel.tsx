@@ -23,7 +23,7 @@ export function ProductCarousel({
   };
 
   return (
-    <section className="mx-auto max-w-[1440px] px-3 py-6 sm:px-5">
+    <section className="container-ee py-6">
       <div className="mb-3 flex items-center justify-between gap-4">
         <h2 className="text-[22px] font-bold text-[#1b2937] sm:text-[26px]">
           {title}
@@ -33,17 +33,21 @@ export function ProductCarousel({
             type="button"
             onClick={() => scroll(-1)}
             aria-label="Scroll left"
-            className="hidden h-8 w-8 items-center justify-center rounded border border-slate-300 bg-card text-ink shadow-sm hover:bg-neutral-50 sm:flex"
+            className="hidden h-8 w-8 items-center justify-center text-[#9aa3ab] hover:text-[#075aaa] sm:flex"
           >
-            ‹
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M15 5 8 12l7 7" />
+            </svg>
           </button>
           <button
             type="button"
             onClick={() => scroll(1)}
             aria-label="Scroll right"
-            className="hidden h-8 w-8 items-center justify-center rounded border border-slate-300 bg-card text-ink shadow-sm hover:bg-neutral-50 sm:flex"
+            className="hidden h-8 w-8 items-center justify-center text-[#9aa3ab] hover:text-[#075aaa] sm:flex"
           >
-            ›
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="m9 5 7 7-7 7" />
+            </svg>
           </button>
           <Link
             href={viewAllHref}

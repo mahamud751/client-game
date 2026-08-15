@@ -1,4 +1,3 @@
-import { BrandCarousel } from "@/components/home/BrandCarousel";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { TestimonialBlock } from "@/components/home/TestimonialBlock";
 import { HomeProductShelf } from "@/components/home/HomeProductShelf";
@@ -16,7 +15,6 @@ import {
 export default function HomePage() {
   return (
     <>
-      <BrandCarousel />
       <HeroCarousel banners={banners} />
       <HomeProductShelf
         title="New & Trending"
