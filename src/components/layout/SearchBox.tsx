@@ -88,7 +88,7 @@ export function SearchBox({
         />
         <button
           type="submit"
-          className={`grid shrink-0 place-items-center rounded-r bg-[#075aaa] text-white hover:bg-[#064c91] ${
+          className={`grid shrink-0 place-items-center rounded-r bg-[#d54215] text-white hover:bg-[#a33010] ${
             compact ? "h-9 w-11" : "h-8 w-11"
           }`}
           aria-label="Search"

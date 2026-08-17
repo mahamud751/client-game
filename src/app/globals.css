@@ -68,7 +68,7 @@ body {
   max-width: var(--container);
   margin-inline: auto;
   padding-inline: var(--container-pad);
-  padding-block: 20px;
+  padding-block: 15px;
 }
 
 /* ---------------------------------------------------------------
@@ -82,24 +82,38 @@ h1 {
 
 /* Big ultra-light centered section headings */
 .section-heading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin: 10px 0 20px;
-  color: var(--ink);
+  color: #003366;
   font-size: 42px;
   font-weight: 200;
-  line-height: 1.1;
+  line-height: 44px;
   text-align: center;
   text-transform: uppercase;
+}
+.section-heading::before,
+.section-heading::after {
+  height: 1px;
+  min-width: 0;
+  flex: 1;
+  background: #ddd;
+  content: "";
 }
 
 @media (max-width: 768px) {
   .section-heading {
-    font-size: 30px;
+    font-size: 36px;
+    line-height: 40px;
   }
 }
 
 @media (max-width: 480px) {
   .section-heading {
     font-size: 24px;
+    line-height: 32px;
   }
 }
 
@@ -107,21 +121,22 @@ h1 {
    Header
    --------------------------------------------------------------- */
 .pencil-bar {
-  background: #078315;
+  background: #008800;
   color: #fff;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   text-align: center;
-  line-height: 31px;
-  height: 31px;
+  line-height: 30px;
+  height: 30px;
 }
 
 .header-action {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 10px;
-  color: #34495e;
+  height: 50px;
+  padding: 15px 5px;
+  color: #000;
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
@@ -132,7 +147,7 @@ h1 {
   height: 16px;
 }
 .header-action:hover {
-  color: #075aaa;
+  color: #d54215;
 }
 
 @media (max-width: 480px) {
@@ -154,17 +169,23 @@ h1 {
   gap: 5px;
   height: 40px;
   padding: 10px;
+  justify-content: center;
   color: #fff;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
   white-space: nowrap;
 }
 .nav-link:hover {
-  background: #075aaa;
+  background: #fff;
+  color: #000;
 }
 .nav-link.nav-deal {
   color: #ffdf00;
+}
+.nav-link.nav-deal:hover {
+  background: #fff;
+  color: #003366;
 }
 
 .mega-panel {
@@ -533,17 +554,21 @@ h1 {
 .product-tile-shelf {
   display: flex;
   flex-direction: column;
+  min-height: 242px;
   border: 1px solid #ddd;
+  border-radius: 5px;
   background: #fff;
   padding: 10px;
 }
 @media (min-width: 768px) {
   .product-tile-shelf {
-    height: 312px;
+    min-height: 242px;
   }
 }
-.product-tile-shelf:hover {
-  box-shadow: 0 4px 14px rgba(18, 39, 61, 0.16);
+.product-tile-shelf:hover,
+.product-tile-shelf:focus-visible {
+  border-color: #d54215;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 .tile-media-shelf {
   position: relative;
@@ -552,14 +577,25 @@ h1 {
   flex: none;
 }
 .tile-title-shelf {
-  color: #34495e;
+  color: #003366;
   font-size: 14px;
-  font-weight: 400;
-  line-height: 19px;
+  font-weight: 700;
+  line-height: 20px;
 }
 .tile-title-shelf:hover {
-  color: #075aaa;
-  text-decoration: underline;
+  text-decoration: none;
+}
+.view-all-tile {
+  min-height: 242px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #ebebeb;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.view-all-tile:hover,
+.view-all-tile:focus-visible {
+  border-color: #d54215;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Compact tile — product-page carousels. Reference: 171x200, 125x125 image. */

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { CarouselArrow } from "@/components/ui/CarouselArrow";
@@ -24,22 +23,19 @@ export function HeroCarousel({ banners }: { banners: Banner[] }) {
           <Link
             key={banner.id}
             href={banner.href}
-            className="group relative aspect-square w-[78vw] max-w-[504px] shrink-0 snap-start overflow-hidden bg-[#111] sm:w-[48vw] lg:w-[40vw]"
+            className="group relative aspect-square w-[78vw] max-w-[504px] shrink-0 snap-start overflow-hidden border border-[#ddd] bg-[#111] sm:w-[48vw] lg:w-[40vw]"
           >
-            <Image
+            {/* Reference artwork already contains the campaign copy. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={banner.image}
               alt={banner.title}
-              fill
-              priority={index < 3}
-              sizes="(max-width: 640px) 78vw, (max-width: 1024px) 48vw, 40vw"
-              className="object-cover transition duration-500 group-hover:scale-[1.025]"
+              fetchPriority={index === 0 ? "high" : "auto"}
+              className="h-full w-full object-cover"
             />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/80 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 flex flex-col items-center px-6 pb-8 text-center text-white">
-              <h2 className="max-w-[420px] text-[24px] font-black uppercase leading-[.98] drop-shadow-md sm:text-[32px]">
-                {banner.title}
-              </h2>
-              <span className="mt-4 inline-flex min-w-[170px] justify-center bg-black px-7 py-3 text-[14px] font-bold uppercase tracking-[.1em] group-hover:bg-white group-hover:text-black">
+            <div className="absolute inset-0 bg-black/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-x-0 bottom-0 flex justify-center px-6 pb-6 text-center text-white">
+              <span className="mt-4 inline-flex min-w-[170px] justify-center border border-white bg-black px-7 py-3 text-[14px] font-semibold uppercase transition-colors hover:bg-white hover:text-black">
                 {banner.cta}
               </span>
             </div>

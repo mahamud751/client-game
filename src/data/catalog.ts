@@ -529,7 +529,7 @@ export const banners: Banner[] = [
     subtitle: "Transformers Generations — new wave now available",
     cta: "Shop Now",
     href: "/themes/transformers",
-    image: "/heroes/01-throne.jpg",
+    image: "https://media.entertainmentearth.com/assets/images/e449340f3c1c47e18dc31d2c906bdcf3.jpg",
     accent: "#e11d48",
   },
   {
@@ -538,7 +538,7 @@ export const banners: Banner[] = [
     subtitle: "Limited exclusives and chase variants this week",
     cta: "Shop Now",
     href: "/shop/vinyl-figures",
-    image: "/heroes/02-vinyl.jpg",
+    image: "https://media.entertainmentearth.com/assets/images/64a3f5e2bff24b1ab5a1b6c968ce719c.jpg",
     accent: "#7c3aed",
   },
   {
@@ -547,7 +547,7 @@ export const banners: Banner[] = [
     subtitle: "Premium collective figure — collector packaging",
     cta: "Shop Now",
     href: "/shop/action-figures",
-    image: "/heroes/03-mystic.jpg",
+    image: "https://media.entertainmentearth.com/assets/images/4b54db36e85f4b89a8d4dc5809788f9e.jpg",
     accent: "#ca8a04",
   },
   {
@@ -556,7 +556,7 @@ export const banners: Banner[] = [
     subtitle: "S.H.Figuarts wave pre-orders open",
     cta: "Pre-Order",
     href: "/pre-orders",
-    image: "/heroes/04-armored.jpg",
+    image: "https://media.entertainmentearth.com/assets/images/c90942b29be94349820e4f015686f463.jpg",
     accent: "#dc2626",
   },
   {
@@ -565,7 +565,7 @@ export const banners: Banner[] = [
     subtitle: "Marvel Legends Series — wave restock",
     cta: "Shop Now",
     href: "/themes/spider-man",
-    image: "/heroes/05-acrobat.jpg",
+    image: "https://media.entertainmentearth.com/assets/images/d83d37f5d3f04fbf9866e2af808fc153.jpg",
     accent: "#b91c1c",
   },
   {
@@ -574,7 +574,7 @@ export const banners: Banner[] = [
     subtitle: "Collector Earth exclusive case packs",
     cta: "Shop Exclusive",
     href: "/exclusives",
-    image: "/heroes/06-retro.jpg",
+    image: "https://media.entertainmentearth.com/assets/images/b7a21352e7844a368c5b8359b1c6fccf.jpg",
     accent: "#1d4ed8",
   },
   {
@@ -583,7 +583,7 @@ export const banners: Banner[] = [
     subtitle: "Hasbro collectible extras for the hottest stage drop",
     cta: "Shop Now",
     href: "/shop",
-    image: "/heroes/07-neon.jpg",
+    image: "https://media.entertainmentearth.com/assets/images/4eab9ca4b3e244de97e2c84d86521754.jpg",
     accent: "#db2777",
   },
   {
@@ -592,7 +592,7 @@ export const banners: Banner[] = [
     subtitle: "Tactical 6-inch figures with premium accessories",
     cta: "Shop Now",
     href: "/shop/action-figures",
-    image: "/heroes/08-tactical.jpg",
+    image: "https://media.entertainmentearth.com/assets/images/724bdce7a5a746e199f06adab65b8165.jpg",
     accent: "#3f6212",
   },
 ];
@@ -1719,7 +1719,7 @@ export const testimonials = [
   {
     id: "t1",
     quote:
-      "This is my go-to place for collectible figures. Always fast shipping and well packed. Easy to order and great customer service.",
+      "I’ve been ordering from Collector Earth since November 2023, and every experience has been exceptional. As a collector, packaging quality and item condition mean everything to me, and Collector Earth has consistently delivered mint-condition products with professional shipping materials. From pre-orders to in-stock items, they provide accurate release dates, reliable updates, and excellent communication. Every shipment I’ve received has arrived well-protected, undamaged, and exactly as described.",
     author: "Marcus R.",
   },
   {

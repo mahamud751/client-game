@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatPrice } from "@/lib/format";
 import type { Product } from "@/lib/types";
 
 export function HomeProductShelf({
@@ -29,21 +28,18 @@ export function HomeProductShelf({
                 alt=""
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 182px"
-                className="object-contain transition-transform duration-300 group-hover:scale-[1.04]"
+                className="object-contain"
               />
             </span>
             <span className="tile-title-shelf mt-2 line-clamp-3 block">
               {product.name}
-            </span>
-            <span className="mt-auto pt-1 text-[17px] font-bold text-[#34495e]">
-              {formatPrice(product.price)}
             </span>
           </Link>
         ))}
 
         <Link
           href={href}
-          className="flex h-[312px] flex-col items-center justify-center border border-[#d9dde1] bg-[#e9e9e9] p-4 text-center text-[#171717] hover:bg-[#dedede]"
+          className="view-all-tile flex flex-col items-center justify-center p-4 text-center text-[#191a1e]"
         >
           <span className="text-[22px] font-black uppercase leading-tight">
             View All

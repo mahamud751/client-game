@@ -1,12 +1,25 @@
 import Link from "next/link";
 
 const tiles = [
-  ["LOOKING FOR", "DEALS?", "Sale", "/deals", "#f04a19"],
-  ["MINT CONDITION", "GUARANTEE", "Collector Care", "/help#mint", "#16814b"],
-  ["EXCLUSIVE", "DROPS", "Shop Now", "/exclusives", "#8c2995"],
-  ["FAN FAVORITE", "ALL-STARS", "Shop Now", "/new", "#0875c1"],
+  ["Looking for Deals or Sales", "/deals", "https://media.entertainmentearth.com/assets/images/6d9864c6f112490a9fe4b2d334922772.jpg"],
+  ["Mint Condition Guarantee", "/help#mint", "https://media.entertainmentearth.com/assets/images/d698d51d56454d949371eb0aa28dd945.jpg"],
+  ["Collector Earth Exclusives", "/exclusives", "https://media.entertainmentearth.com/assets/images/87e8e53e051d4e0aa07c3c389d11249e.jpg"],
+  ["Funko All-Stars", "/new", "https://media.entertainmentearth.com/assets/images/68de9a3b3d0d428e9e8ea50a7b8f6b99.jpg"],
 ];
 
 export function PromoTiles() {
-  return <section className="home-section grid gap-3 py-5 sm:grid-cols-2 lg:grid-cols-4">{tiles.map(([top, main, tag, href, color]) => <Link key={main} href={href} className="flex h-[105px] flex-col items-center justify-center border-2 border-white text-center text-white shadow ring-1 ring-slate-300" style={{ background: `linear-gradient(135deg, #151515, ${color})` }}><span className="text-xs font-bold">{top}</span><strong className="text-2xl font-black italic leading-none">{main}</strong><span className="mt-2 bg-black px-3 py-1 text-[8px] font-black uppercase">{tag}</span></Link>)}</section>;
+  return (
+    <section className="home-section grid grid-cols-2 gap-[10px] py-5 sm:grid-cols-4">
+      {tiles.map(([alt, href, src]) => (
+        <Link key={alt} href={href} className="block overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={alt}
+            className="h-auto w-full transition-transform duration-400 hover:scale-110 hover:-rotate-[1.1deg]"
+          />
+        </Link>
+      ))}
+    </section>
+  );
 }

@@ -125,10 +125,10 @@ export function Header() {
       </a>
 
       {/* ---- White utility row: logo · search · account actions ---- */}
-      <div className="container-ee flex h-[90px] items-center gap-4">
+      <div className="container-ee flex h-[50px] items-center gap-[10px]">
         <button
           type="button"
-          className="grid h-10 w-10 shrink-0 place-items-center text-[#173b61] lg:hidden"
+          className="grid h-10 w-10 shrink-0 place-items-center text-black lg:hidden"
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((v) => !v)}
@@ -147,13 +147,13 @@ export function Header() {
 
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5"
+          className="flex shrink-0 items-center gap-2 md:min-w-[275px]"
           aria-label="Collector Earth home"
         >
-          <span className="grid h-[38px] w-[38px] place-items-center rounded-full border-[3px] border-[#111] bg-[#111] text-[13px] font-black italic text-white">
+          <span className="grid h-[34px] w-[34px] place-items-center rounded-full border-[3px] border-[#111] bg-[#111] text-[12px] font-black italic text-white">
             CE
           </span>
-          <span className="hidden text-[19px] font-bold uppercase tracking-[-.01em] text-[#111] sm:block">
+          <span className="hidden text-[18px] font-bold uppercase tracking-[-.01em] text-[#111] sm:block">
             Collector Earth
           </span>
         </Link>
@@ -188,7 +188,7 @@ export function Header() {
         className="menu-bar relative hidden lg:block"
         onMouseLeave={() => setOpenMenu(null)}
       >
-        <ul className="container-ee flex items-stretch">
+        <ul className="container-ee flex items-stretch justify-between">
           <li>
             <Link className="nav-link" href="/shop">
               Drop Zone!
@@ -214,7 +214,7 @@ export function Header() {
                 onClick={() =>
                   setOpenMenu((v) => (v === menu.key ? null : menu.key))
                 }
-                className={`nav-link ${openMenu === menu.key ? "bg-[#075aaa]" : ""}`}
+                className={`nav-link ${openMenu === menu.key ? "bg-white text-black" : ""}`}
                 aria-expanded={openMenu === menu.key}
               >
                 {menu.label} <span className="text-[9px]">▼</span>
@@ -241,7 +241,7 @@ export function Header() {
               onClick={() =>
                 setOpenMenu((v) => (v === "featured" ? null : "featured"))
               }
-              className={`nav-link ${openMenu === "featured" ? "bg-[#075aaa]" : ""}`}
+              className={`nav-link ${openMenu === "featured" ? "bg-white text-black" : ""}`}
               aria-expanded={openMenu === "featured"}
             >
               Featured <span className="text-[9px]">▼</span>
