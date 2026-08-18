@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { brands, categories, featuredNav, themes } from "@/data/catalog";
 import { useCart } from "@/components/cart/CartProvider";
+import { brandMarks } from "@/components/home/BrandCarousel";
 import { SearchBox } from "./SearchBox";
 
 const Icon = ({
@@ -68,6 +69,9 @@ type MegaItem = {
   count?: number;
 };
 
+const getCarouselMark = (href: string, label: string) =>
+  brandMarks.find((mark) => mark.href === href || mark.name === label)?.src;
+
 export function Header() {
   const { itemCount } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -84,7 +88,7 @@ export function Header() {
       items: themes.map((t) => ({
         href: `/themes/${t.slug}`,
         label: t.name,
-        image: t.image,
+        image: getCarouselMark(`/themes/${t.slug}`, t.name) ?? t.image,
         count: t.count,
       })),
     },
@@ -104,14 +108,17 @@ export function Header() {
       items: brands.map((b) => ({
         href: `/company/${b.slug}`,
         label: b.name,
-        image: b.image,
+        image: getCarouselMark(`/company/${b.slug}`, b.name) ?? b.image,
         count: b.count,
       })),
     },
     {
       key: "featured",
       label: "Featured",
-      items: featuredNav,
+      items: featuredNav.map((item) => ({
+        ...item,
+        image: getCarouselMark(item.href, item.label) ?? "/products/heroes-pack.jpg",
+      })),
     },
   ];
 
@@ -233,7 +240,7 @@ export function Header() {
             </li>
           ))}
 
-          <li className="relative">
+          <li>
             <button
               type="button"
               onMouseEnter={() => setOpenMenu("featured")}
@@ -246,23 +253,10 @@ export function Header() {
             >
               Featured <span className="text-[9px]">▼</span>
             </button>
-            {openMenu === "featured" && (
-              <div className="featured-dropdown">
-                {featuredNav.map((item) => (
-                  <Link
-                    key={item.href + item.label}
-                    href={item.href}
-                    onClick={() => setOpenMenu(null)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            )}
           </li>
         </ul>
 
-        {openMenu && openMenu !== "featured" && (
+        {openMenu && (
           <div
             className="mega-panel"
             onMouseEnter={() => setOpenMenu(openMenu)}
@@ -287,15 +281,16 @@ export function Header() {
                               src={item.image ?? ""}
                               alt=""
                               fill
-                              sizes="56px"
-                              className="object-cover"
+                              sizes="110px"
+                              className="object-contain"
                             />
                           </span>
-                          <span className="mega-copy">
-                            <span className="mega-name">{item.label}</span>
+                          <span className="mega-name">
+                            {item.label}
                             {item.count != null && (
                               <span className="mega-count">
-                                {item.count.toLocaleString()}
+                                {" "}
+                                ({item.count.toLocaleString()})
                               </span>
                             )}
                           </span>

@@ -196,83 +196,60 @@ h1 {
   z-index: 40;
   width: 100%;
   background: #fff;
-  border-bottom: 4px solid #075aaa;
-  box-shadow: 0 12px 24px rgba(15, 30, 50, 0.16);
-}
-.featured-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  z-index: 50;
-  min-width: 210px;
-  padding: 8px 0;
-  background: #fff;
-  border-bottom: 4px solid #075aaa;
-  box-shadow: 0 8px 20px rgba(15, 30, 50, 0.16);
-}
-.featured-dropdown a {
-  display: block;
-  padding: 8px 18px;
-  color: #5e656e;
-  font-size: 14px;
-  line-height: 21px;
-  white-space: nowrap;
-}
-.featured-dropdown a:hover {
-  color: #075aaa;
-  background: #f4f7fa;
-  text-decoration: underline;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }
 .mega-title {
-  margin-bottom: 12px;
-  border-bottom: 2px solid #075aaa;
-  padding-bottom: 7px;
-  color: #183a5d;
-  font-size: 14px;
-  font-weight: 700;
+  margin: 0 0 10px;
+  color: #003366;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
   text-transform: uppercase;
 }
 .mega-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: 28px;
-  row-gap: 10px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
 }
 .mega-item {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  min-height: 170px;
+  flex-direction: column;
+  justify-content: space-between;
   min-width: 0;
-  padding: 6px 4px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #fff;
+  padding: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .mega-thumb {
   position: relative;
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0;
+  display: block;
+  width: 100%;
+  height: 110px;
+  flex: none;
   overflow: hidden;
-  background: #f4f6f8;
-}
-.mega-copy {
-  min-width: 0;
+  background: #fff;
 }
 .mega-name {
   display: block;
-  color: #5e656e;
+  margin-top: 8px;
+  color: #003366;
   font-size: 14px;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 18px;
+  text-align: center;
 }
 .mega-count {
-  display: block;
-  margin-top: 2px;
-  color: #8a929a;
-  font-size: 13px;
-  line-height: 1.2;
+  color: #5e656e;
+  font-weight: 400;
 }
-.mega-item:hover .mega-name {
-  color: #075aaa;
-  text-decoration: underline;
+.mega-item:hover,
+.mega-item:focus-visible {
+  border-color: #d54215;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 .mega-link {
   display: block;
@@ -284,6 +261,12 @@ h1 {
 .mega-link:hover {
   color: #075aaa;
   text-decoration: underline;
+}
+
+@media (max-width: 1180px) {
+  .mega-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
 
 .hero-arrow {

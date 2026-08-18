@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { CarouselArrow } from "@/components/ui/CarouselArrow";
 
-const brandMarks: { name: string; href: string; src: string }[] = [
+export const brandMarks: { name: string; href: string; src: string }[] = [
   { name: "New & Trending", href: "/new", src: "https://media.entertainmentearth.com/assets/images/c6002e5392534fef8aba6e66595e5adf.gif" },
   { name: "Exclusives", href: "/exclusives", src: "https://media.entertainmentearth.com/assets/images/62e87f2a812c450e940dfbbb8e0bcc2a.jpg" },
   { name: "Funko", href: "/company/funko", src: "https://media.entertainmentearth.com/assets/images/d6c500a3906f44bda03a8a4a42602576.jpg" },
