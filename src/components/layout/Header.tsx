@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { brands, categories, featuredNav, themes } from "@/data/catalog";
@@ -72,6 +71,13 @@ type MegaItem = {
 const getCarouselMark = (href: string, label: string) =>
   brandMarks.find((mark) => mark.href === href || mark.name === label)?.src;
 
+const themeLogoFallbacks: Record<string, string> = {
+  batman: "/products/batman.jpg",
+  godzilla: "/themes/godzilla.jpg",
+  "dragon-ball": "/products/dragon.jpg",
+  "spider-man": "/heroes/05-acrobat.jpg",
+};
+
 export function Header() {
   const { itemCount } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -88,7 +94,10 @@ export function Header() {
       items: themes.map((t) => ({
         href: `/themes/${t.slug}`,
         label: t.name,
-        image: getCarouselMark(`/themes/${t.slug}`, t.name) ?? t.image,
+        image:
+          getCarouselMark(`/themes/${t.slug}`, t.name) ??
+          themeLogoFallbacks[t.slug] ??
+          t.image,
         count: t.count,
       })),
     },
@@ -221,7 +230,7 @@ export function Header() {
                 onClick={() =>
                   setOpenMenu((v) => (v === menu.key ? null : menu.key))
                 }
-                className={`nav-link ${openMenu === menu.key ? "bg-white text-black" : ""}`}
+                className="nav-link"
                 aria-expanded={openMenu === menu.key}
               >
                 {menu.label} <span className="text-[9px]">▼</span>
@@ -248,7 +257,7 @@ export function Header() {
               onClick={() =>
                 setOpenMenu((v) => (v === "featured" ? null : "featured"))
               }
-              className={`nav-link ${openMenu === "featured" ? "bg-white text-black" : ""}`}
+              className="nav-link"
               aria-expanded={openMenu === "featured"}
             >
               Featured <span className="text-[9px]">▼</span>
@@ -277,12 +286,11 @@ export function Header() {
                           onClick={() => setOpenMenu(null)}
                         >
                           <span className="mega-thumb">
-                            <Image
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
                               src={item.image ?? ""}
-                              alt=""
-                              fill
-                              sizes="110px"
-                              className="object-contain"
+                              alt={item.label}
+                              className="h-full w-full object-contain"
                             />
                           </span>
                           <span className="mega-name">
