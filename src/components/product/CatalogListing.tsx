@@ -36,6 +36,7 @@ const PRICE_BUCKETS: { id: string; label: string; test: (p: number) => boolean }
   ];
 
 const PER_PAGE = 24;
+const EMPTY_FACETS: ThemeFacet[] = [];
 
 /** Collapsible facet panel with a coloured accent rail. */
 function FacetPanel({
@@ -58,8 +59,10 @@ function FacetPanel({
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
       >
-        <span>{title}</span>
-        <span className="facet-caret">{open ? "▼" : "►"}</span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="facet-caret">{open ? "▼" : "►"}</span>
+          {title}
+        </span>
       </button>
       {open && <div className="facet-body">{children}</div>}
     </section>
@@ -165,9 +168,9 @@ export function CatalogListing({
   const [etas, setEtas] = useState<string[]>([]);
   const [page, setPage] = useState(1);
 
-  const subthemeFacets = themeFacets?.themes ?? [];
-  const collectionFacets = themeFacets?.collections ?? [];
-  const characterFacets = themeFacets?.characters ?? [];
+  const subthemeFacets = themeFacets?.themes ?? EMPTY_FACETS;
+  const collectionFacets = themeFacets?.collections ?? EMPTY_FACETS;
+  const characterFacets = themeFacets?.characters ?? EMPTY_FACETS;
 
   const toggle =
     (setter: React.Dispatch<React.SetStateAction<string[]>>) =>
@@ -292,7 +295,7 @@ export function CatalogListing({
 
       <div className="listing-shell mt-5">
         {/* ---------------- Facet sidebar ---------------- */}
-        <aside aria-label="Filter products">
+        <aside className="listing-facets" aria-label="Filter products">
           <FacetPanel title="Newly Added" accent="#003366">
             <CheckRow
               label="New Arrivals"
@@ -428,7 +431,7 @@ export function CatalogListing({
             <h2 className="listing-title">{heading ?? title}</h2>
             <button
               type="button"
-              className="shrink-0 rounded border border-[#c4c4c4] bg-white px-3 py-1.5 text-[14px] text-[#34495e] hover:border-[#075aaa] hover:text-[#075aaa]"
+              className="listing-save-search"
             >
               Save Search
             </button>

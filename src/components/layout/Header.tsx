@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { CheckoutSignInModal } from "@/components/checkout/CheckoutSignInModal";
 import { brands, categories, featuredNav, themes } from "@/data/catalog";
 import { useCart } from "@/components/cart/CartProvider";
 import { brandMarks } from "@/components/home/BrandCarousel";
@@ -82,6 +83,7 @@ export function Header() {
   const { itemCount } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
+  const [authOpen, setAuthOpen] = useState(false);
 
   const dropdowns: {
     key: MenuKey;
@@ -179,10 +181,14 @@ export function Header() {
         </div>
 
         <nav className="ml-auto flex shrink-0 items-center">
-          <Link href="/account" className="header-action">
+          <button
+            type="button"
+            className="header-action"
+            onClick={() => setAuthOpen(true)}
+          >
             <Icon name="user" />
             <span>Sign In</span>
-          </Link>
+          </button>
           <Link href="/help" className="header-action hidden sm:flex">
             <Icon name="help" />
             <span>Help</span>
@@ -270,7 +276,7 @@ export function Header() {
             className="mega-panel"
             onMouseEnter={() => setOpenMenu(openMenu)}
           >
-            <div className="container-ee py-5">
+            <div className="py-5">
               {(() => {
                 const menu = dropdowns.find((d) => d.key === openMenu);
                 if (!menu) return null;
@@ -368,6 +374,7 @@ export function Header() {
           </div>
         </nav>
       )}
+      <CheckoutSignInModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </header>
   );
 }

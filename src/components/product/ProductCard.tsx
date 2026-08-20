@@ -1,16 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
-import { formatPrice, statusLabel } from "@/lib/format";
+import { formatPrice } from "@/lib/format";
 import { AddToCartButton } from "./AddToCartButton";
 import { site } from "@/data/catalog";
 
-const statusColor: Record<string, string> = {
-  "in-stock": "text-[#15803d]",
-  "pre-order": "text-[#075aaa]",
-  backorder: "text-amber-700",
-  "sold-out": "text-[#b91c1c]",
-};
+function shortDate(iso?: string) {
+  if (!iso) return null;
+  const date = new Date(`${iso}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleString("en-US", { month: "short", day: "numeric" });
+}
 
 export function ProductCard({
   product,
@@ -20,13 +20,20 @@ export function ProductCard({
   /** "compact" is the smaller product-page carousel card (171x200). */
   variant?: "listing" | "compact";
 }) {
-  const flag = product.justAdded
-    ? "Hot Off\nThe Truck"
-    : product.newArrival
-      ? "Newly\nAdded"
-      : product.exclusive
-        ? "Exclusive"
-        : null;
+  const flag =
+    product.status === "pre-order"
+      ? {
+          label: "New Pre-\nOrders",
+          className: "tile-flag-new",
+          sublabel: shortDate(product.releaseDate),
+        }
+      : product.justAdded
+        ? { label: "Hot Off\nThe Truck", className: "tile-flag-hot" }
+        : product.newArrival
+          ? { label: "Newly\nAdded", className: "tile-flag-new" }
+          : product.exclusive
+            ? { label: "Exclusive", className: "tile-flag-exclusive" }
+            : null;
 
   if (variant === "compact") {
     return (
@@ -58,7 +65,14 @@ export function ProductCard({
   return (
     <article className="product-tile">
       <div className="relative">
-        {flag && <span className="tile-flag whitespace-pre-line">{flag}</span>}
+        {flag && (
+          <span className={`tile-flag whitespace-pre-line ${flag.className}`}>
+            <span className="tile-flag-main">{flag.label}</span>
+            {flag.sublabel && (
+              <span className="tile-flag-sub">{flag.sublabel}</span>
+            )}
+          </span>
+        )}
         <Link
           href={`/product/${product.slug}`}
           className="tile-media block"
@@ -75,6 +89,12 @@ export function ProductCard({
         </Link>
       </div>
 
+      <AddToCartButton
+        product={product}
+        variant="tile"
+        className="tile-cart mt-1.5"
+      />
+
       <Link
         href={`/product/${product.slug}`}
         className="tile-title mt-2 line-clamp-2 block"
@@ -84,13 +104,7 @@ export function ProductCard({
 
       <p className="tile-meta mt-1">Item #: {product.sku}</p>
 
-      <p
-        className={`text-[13px] font-semibold ${statusColor[product.status] ?? ""}`}
-      >
-        {statusLabel(product.status)}
-      </p>
-
-      <div className="mt-auto pt-1">
+      <div className="mt-1">
         <div className="flex items-baseline gap-2">
           <span className="tile-price">{formatPrice(product.price)}</span>
           {product.compareAt && product.compareAt > product.price && (
@@ -101,16 +115,8 @@ export function ProductCard({
         </div>
 
         {product.price >= site.freeShippingMin && (
-          <p className="text-[12px] font-semibold text-[#15803d]">
-            Free USA Shipping
-          </p>
+          <p className="tile-shipping mt-0.5">Free USA Shipping</p>
         )}
-
-        <AddToCartButton
-          product={product}
-          variant="tile"
-          className="tile-cart mt-1.5"
-        />
       </div>
     </article>
   );

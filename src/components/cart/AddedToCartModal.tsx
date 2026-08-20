@@ -169,9 +169,9 @@ export function AddedToCartModal({
                       key={p.id}
                       href={`/product/${p.slug}`}
                       onClick={onClose}
-                      className="border border-[#ddd] bg-white p-2 hover:shadow"
+                      className="atc-rel-card"
                     >
-                      <span className="relative block h-[95px] w-full">
+                      <span className="atc-rel-media">
                         <Image
                           src={p.image}
                           alt=""

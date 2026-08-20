@@ -5,11 +5,12 @@ import { BuyBox } from "@/components/product/BuyBox";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductCarousel } from "@/components/product/ProductCarousel";
 import {
+  brands,
+  categories,
   getProductBySlug,
   getProductsByTheme,
   getTheme,
   products,
-  site,
 } from "@/data/catalog";
 import { formatPrice, statusLabel } from "@/lib/format";
 
@@ -35,6 +36,45 @@ const MONTHS = [
   "July", "August", "September", "October", "November", "December",
 ];
 
+const featuredCategoryItems = [
+  {
+    id: "hasbro",
+    name: "Hasbro",
+    href: "/company/hasbro",
+    image: "https://media.entertainmentearth.com/assets/images/405d8c156817483ebbd33e2fb9757575.jpg",
+  },
+  {
+    id: "transformers",
+    name: "Transformers",
+    href: "/themes/transformers",
+    image: "https://media.entertainmentearth.com/assets/images/5a97110c52c34b718fc1feb0510b318e.jpg",
+  },
+  {
+    id: "funko",
+    name: "Funko",
+    href: "/company/funko",
+    image: "https://media.entertainmentearth.com/assets/images/d6c500a3906f44bda03a8a4a42602576.jpg",
+  },
+  {
+    id: "star-wars",
+    name: "Star Wars",
+    href: "/themes/star-wars",
+    image: "https://media.entertainmentearth.com/assets/images/e2013b27be7f4163a411fa49d305159c.jpg",
+  },
+  {
+    id: "mcfarlane-toys",
+    name: "McFarlane Toys",
+    href: "/company/mcfarlane-toys",
+    image: "/companies/banners/mcfarlane-toys.svg",
+  },
+  {
+    id: "batman",
+    name: "Batman",
+    href: "/themes/batman",
+    image: "/brands/batman.svg",
+  },
+];
+
 /** "2026-11-20" -> "NOVEMBER 2026" */
 function etaLabel(iso?: string) {
   if (!iso) return null;
@@ -58,21 +98,19 @@ export default async function ProductPage({
   const related = getProductsByTheme(product.theme)
     .filter((p) => p.id !== product.id)
     .slice(0, 10);
-  const alsoBought = products
-    .filter((p) => p.id !== product.id && p.category === product.category)
+  const inspired = products
+    .filter((p) => p.id !== product.id && (p.trending || p.justAdded || p.status === "pre-order"))
     .slice(0, 10);
-
-  const statusColor =
-    product.status === "in-stock"
-      ? "text-[#15803d]"
-      : product.status === "pre-order"
-        ? "text-[#075aaa]"
-        : product.status === "sold-out"
-          ? "text-[#b91c1c]"
-          : "text-amber-700";
+  const toCarouselItems = (list: typeof products) =>
+    list.map((p) => ({
+      id: p.id,
+      name: p.name,
+      href: `/product/${p.slug}`,
+      image: p.image,
+    }));
 
   return (
-    <div className="container-ee py-4">
+    <div className="container-ee pdp-page">
       <Breadcrumbs
         items={[
           { label: "Shop", href: "/shop" },
@@ -84,10 +122,10 @@ export default async function ProductPage({
         ]}
       />
 
-      <div className="pdp-grid mt-2">
+      <div className="pdp-grid">
         <ProductGallery product={product} />
 
-        <div>
+        <div className="pdp-info">
           <h1 className="pdp-title">{product.name}</h1>
 
           <h2 className="pdp-subtitle">
@@ -102,106 +140,106 @@ export default async function ProductPage({
             </Link>
           </h2>
 
-          <p className="mt-2 text-[13px] text-[#7b8794]">
-            Item #: {product.sku}
-            {product.rating ? ` · ★ ${product.rating.toFixed(1)}` : ""}
-            {product.reviewCount ? ` (${product.reviewCount} reviews)` : ""}
+          <p className="pdp-sku">
+            Item Number: {product.sku}
           </p>
 
-          <div className="mt-4 flex items-baseline gap-3">
-            <span className="text-[32px] font-bold leading-none text-[#34495e]">
-              {formatPrice(product.price)}
-            </span>
-            {product.compareAt && product.compareAt > product.price && (
-              <span className="text-[17px] text-[#7b8794] line-through">
-                {formatPrice(product.compareAt)}
-              </span>
+          <div className="pdp-price-row">
+            <div>
+              <p className="pdp-price">{formatPrice(product.price)}</p>
+              <p className="pdp-free-ship">Free USA Shipping</p>
+            </div>
+            {eta && (
+              <div className="pdp-eta-block">
+                <p className="pdp-eta-label">Estimated to Arrive in</p>
+                <p className="pdp-eta">{eta}</p>
+              </div>
             )}
           </div>
 
-          <p className={`mt-2 text-[15px] font-bold ${statusColor}`}>
-            {statusLabel(product.status)}
-          </p>
-
-          {eta && (
-            <div className="mt-3">
-              <p className="pdp-eta-label">Estimated to Arrive in</p>
-              <p className="pdp-eta">{eta}</p>
-            </div>
-          )}
-
           <BuyBox product={product} />
 
-          <div className="mt-5 border-t border-[#e8ebee] pt-4">
-            <p className="text-[15px] font-bold text-[#075aaa]">
-              Mint Condition Guaranteed ™
-            </p>
-            <p className="pdp-note mt-1">
-              Experience our package inspection process. Perfect items, best
-              packaging, no extra charge.
-            </p>
-            <p className="pdp-note mt-2">
-              Free shipping on orders ${site.freeShippingMin}+ · Hassle-free
-              90-day returns.
-            </p>
+          <div className="pdp-assurances">
+            <p>✔ Estimated ship date subject to change. You will not be charged until this is ready to ship.</p>
+            <p>✔ This item cannot ship to certain locations outside the United States.</p>
+            <div className="pdp-mint">
+              <span>MINT<br />CONDITION<br />GUARANTEED</span>
+              <p>
+                <strong>Mint Condition Guaranteed ™</strong>
+                <br />
+                Experience our package inspection process. Perfect items, best packaging, no extra charge!
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* ---- Description ---- */}
-      <section className="mt-10">
+      <section className="pdp-copy-section">
         <h2 className="pdp-section-title">Description</h2>
-        <p className="mt-3 max-w-[900px] text-[14px] leading-[22px] text-[#34495e]">
+        <p className="pdp-copy-lead">{product.name}:</p>
+        <p className="pdp-copy">
           {product.description}
         </p>
         {product.features && product.features.length > 0 && (
-          <ul className="mt-3 list-inside list-disc space-y-1 text-[14px] leading-[22px] text-[#34495e]">
+          <ul className="pdp-feature-list">
             {product.features.map((f) => (
-              <li key={f}>{f}</li>
+              <li key={f}>-{f}</li>
             ))}
           </ul>
         )}
+        <p className="pdp-copy">
+          Each {product.name} is packaged in a collector-friendly box, designed with collectors in mind.
+        </p>
       </section>
 
       {/* ---- Specifications ---- */}
-      <section className="mt-8">
+      <section className="pdp-copy-section">
         <h2 className="pdp-section-title">Specifications</h2>
-        <div className="mt-3 max-w-[760px]">
+        <div className="pdp-specs">
           <div className="pdp-spec-row">
-            <span className="pdp-spec-key">Item Number</span>
-            <span className="pdp-spec-val">{product.sku}</span>
+            <span className="pdp-spec-key">Company:</span>
+            <Link href={`/company/${brands.find((b) => b.name === product.brand)?.slug ?? ""}`} className="pdp-spec-val">{product.brand}</Link>
           </div>
           <div className="pdp-spec-row">
-            <span className="pdp-spec-key">Brand</span>
-            <span className="pdp-spec-val">{product.brand}</span>
+            <span className="pdp-spec-key">Theme:</span>
+            <Link href={`/themes/${theme?.slug ?? product.theme}`} className="pdp-spec-val">{theme?.name ?? product.theme}</Link>
           </div>
           <div className="pdp-spec-row">
-            <span className="pdp-spec-key">Product Type</span>
-            <span className="pdp-spec-val capitalize">
+            <span className="pdp-spec-key">Product Type:</span>
+            <Link href={`/shop/${product.category}`} className="pdp-spec-val capitalize">
               {product.category.replace(/-/g, " ")}
-            </span>
+            </Link>
           </div>
           <div className="pdp-spec-row">
-            <span className="pdp-spec-key">Theme</span>
-            <span className="pdp-spec-val">{theme?.name ?? product.theme}</span>
+            <span className="pdp-spec-key">Collection:</span>
+            <span className="pdp-spec-val">Collector Series</span>
           </div>
           <div className="pdp-spec-row">
-            <span className="pdp-spec-key">Availability</span>
+            <span className="pdp-spec-key">Availability:</span>
             <span className="pdp-spec-val">{statusLabel(product.status)}</span>
           </div>
           {eta && (
             <div className="pdp-spec-row">
-              <span className="pdp-spec-key">Estimated Arrival</span>
+              <span className="pdp-spec-key">Estimated Arrival:</span>
               <span className="pdp-spec-val">{eta}</span>
             </div>
           )}
         </div>
+        <div className="pdp-ce-mark" aria-hidden>CE</div>
       </section>
 
-      {alsoBought.length > 0 && (
+      <div className="pdp-view-links">
+        <Link href={`/company/${brands.find((b) => b.name === product.brand)?.slug ?? ""}`}>See All {product.brand} Merchandise</Link>
+        <Link href={`/shop/${product.category}`}>See All {theme?.name ?? "Collector"} {product.category.replace(/-/g, " ")}</Link>
+        <Link href={`/themes/${product.theme}`}>See All {theme?.name ?? product.theme} Items</Link>
+        <Link href="/shop">See All Collector Earth Items</Link>
+      </div>
+
+      {inspired.length > 0 && (
         <ProductCarousel
-          title="Customers Who Bought This Also Bought"
-          products={alsoBought}
+          title="Inspired By Your Browsing History"
+          items={toCarouselItems(inspired)}
           viewAllHref={`/shop/${product.category}`}
         />
       )}
@@ -209,8 +247,17 @@ export default async function ProductPage({
       {related.length > 0 && (
         <ProductCarousel
           title="You May Also Like"
-          products={related}
+          items={toCarouselItems(related)}
           viewAllHref={`/themes/${product.theme}`}
+        />
+      )}
+
+      {featuredCategoryItems.length > 0 && (
+        <ProductCarousel
+          title="Featured Categories"
+          items={featuredCategoryItems}
+          viewAllHref={`/shop/${categories[0]?.slug ?? ""}`}
+          variant="logos"
         />
       )}
     </div>

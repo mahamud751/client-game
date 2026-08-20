@@ -5,11 +5,13 @@ export function CarouselArrow({
   onClick,
   label,
   variant = "hero",
+  disabled = false,
 }: {
   direction: "prev" | "next";
   onClick: () => void;
   label: string;
   variant?: Variant;
+  disabled?: boolean;
 }) {
   const isPrev = direction === "prev";
   const chevron = (
@@ -33,6 +35,7 @@ export function CarouselArrow({
         type="button"
         onClick={onClick}
         aria-label={label}
+        disabled={disabled}
         className="brand-arrow"
       >
         {chevron}
@@ -45,6 +48,7 @@ export function CarouselArrow({
       type="button"
       onClick={onClick}
       aria-label={label}
+      disabled={disabled}
       className={`hero-arrow ${isPrev ? "left-0" : "right-0"}`}
     >
       {chevron}

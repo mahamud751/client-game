@@ -4,29 +4,103 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/components/cart/CartProvider";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { PageHeader } from "@/components/layout/PageHeader";
-import { site } from "@/data/catalog";
+import { products as allProducts, site } from "@/data/catalog";
 import { formatPrice } from "@/lib/format";
+import type { Product } from "@/lib/types";
+
+function etaLabel(iso?: string) {
+  if (!iso) return null;
+  const date = new Date(`${iso}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleString("en-US", { month: "long", year: "numeric" });
+}
+
+function CartProductShelf({
+  title,
+  products,
+}: {
+  title: string;
+  products: Product[];
+}) {
+  if (!products.length) return null;
+
+  return (
+    <section className="cart-shelf">
+      <h2 className="cart-shelf-title">{title}</h2>
+      <div className="cart-shelf-row">
+        <button
+          type="button"
+          className="cart-shelf-arrow"
+          disabled
+          aria-label={`Previous ${title}`}
+        >
+          ‹
+        </button>
+        <div className="cart-shelf-grid">
+          {products.slice(0, 6).map((product) => (
+            <Link
+              key={product.id}
+              href={`/product/${product.slug}`}
+              className="cart-shelf-card"
+            >
+              <span className="cart-shelf-media">
+                <Image
+                  src={product.image}
+                  alt=""
+                  fill
+                  sizes="160px"
+                  className="object-contain"
+                />
+              </span>
+              <span className="cart-shelf-name line-clamp-3">
+                {product.name}
+              </span>
+            </Link>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="cart-shelf-arrow"
+          disabled
+          aria-label={`Next ${title}`}
+        >
+          ›
+        </button>
+      </div>
+      <div className="cart-shelf-dots" aria-hidden>
+        <span />
+        <span />
+        <span />
+      </div>
+    </section>
+  );
+}
 
 export function CartView() {
   const { items, subtotal, updateQty, removeItem, itemCount } = useCart();
   const freeShip = subtotal >= site.freeShippingMin;
   const remaining = Math.max(0, site.freeShippingMin - subtotal);
+  const shipping = items.length && !freeShip ? 19.95 : 0;
+  const total = subtotal + shipping;
+  const inCartIds = new Set(items.map(({ product }) => product.id));
+  const seed = items[0]?.product;
+  const inspired = allProducts.filter(
+    (product) =>
+      !inCartIds.has(product.id) &&
+      (product.theme === seed?.theme || product.trending || product.justAdded),
+  );
+  const recent = allProducts.filter((product) => !inCartIds.has(product.id)).slice(0, 6);
 
   return (
-    <div className="container-ee py-6">
+    <div className="container-ee py-5">
       <Breadcrumbs items={[{ label: "Cart" }]} />
-      <PageHeader
-        title="Your Cart"
-        description={
-          itemCount
-            ? `${itemCount} item${itemCount === 1 ? "" : "s"} in your cart`
-            : "Your cart is empty"
-        }
-      />
+      <h1 className="cart-page-title">
+        Your Shopping Cart
+        {itemCount > 0 && ` (${itemCount} Item${itemCount === 1 ? "" : "s"})`}
+      </h1>
 
       {items.length === 0 ? (
-        <div className="border border-dashed border-border bg-card p-12 text-center">
+        <div className="cart-empty">
           <p className="text-lg font-medium text-ink">Nothing here yet</p>
           <p className="mt-1 text-sm text-muted">
             Browse New & Trending or Shop All to start collecting.
@@ -47,108 +121,138 @@ export function CartView() {
           </div>
         </div>
       ) : (
-        <div className="grid gap-8 lg:grid-cols-3">
-          <div className="space-y-4 lg:col-span-2">
-            {items.map(({ product, quantity }) => (
-              <div
-                key={product.id}
-                className="flex gap-4 border border-slate-200 bg-card p-4 shadow-sm"
-              >
-                <Link
-                  href={`/product/${product.slug}`}
-                  className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-neutral-100"
-                >
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                    sizes="96px"
-                  />
-                </Link>
-                <div className="min-w-0 flex-1">
-                  <Link
-                    href={`/product/${product.slug}`}
-                    className="line-clamp-2 font-semibold text-ink hover:text-accent"
-                  >
-                    {product.name}
-                  </Link>
-                  <p className="mt-0.5 text-xs text-muted">{product.brand}</p>
-                  <p className="mt-1 font-bold text-ink">
-                    {formatPrice(product.price)}
-                  </p>
-                  <div className="mt-3 flex flex-wrap items-center gap-3">
-                    <label className="flex items-center gap-2 text-sm">
-                      Qty
+        <>
+          <div className="cart-layout">
+            <div>
+              <div className="cart-free-ship">
+                Free Super Saver Shipping on all orders ${site.freeShippingMin}+.
+                {!freeShip && (
+                  <span> Add {formatPrice(remaining)} more to qualify.</span>
+                )}
+              </div>
+
+              <div className="cart-table">
+                <div className="cart-table-head">
+                  <span>Item</span>
+                  <span>Quantity</span>
+                  <span>Price</span>
+                  <span>Subtotal</span>
+                </div>
+
+                {items.map(({ product, quantity }) => (
+                  <div key={product.id} className="cart-row">
+                    <div className="cart-item-cell">
+                      <Link
+                        href={`/product/${product.slug}`}
+                        className="cart-item-media"
+                      >
+                        <Image
+                          src={product.image}
+                          alt={product.name}
+                          fill
+                          className="object-contain"
+                          sizes="110px"
+                        />
+                      </Link>
+                      <div className="min-w-0">
+                        <Link
+                          href={`/product/${product.slug}`}
+                          className="cart-item-title"
+                        >
+                          {product.name}
+                        </Link>
+                        <p className="cart-item-meta">Item #: {product.sku}</p>
+                        <p
+                          className={
+                            product.status === "in-stock"
+                              ? "cart-stock"
+                              : "cart-preorder"
+                          }
+                        >
+                          {product.status === "in-stock"
+                            ? "In Stock"
+                            : etaLabel(product.releaseDate)
+                              ? `Estimated to Arrive in ${etaLabel(product.releaseDate)}`
+                              : "Pre-Order"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="cart-qty-cell">
                       <select
                         value={quantity}
                         onChange={(e) =>
                           updateQty(product.id, Number(e.target.value))
                         }
-                        className="rounded border border-border bg-white px-2 py-1"
+                        className="cart-qty-select"
+                        aria-label={`Quantity for ${product.name}`}
                       >
-                        {Array.from({ length: 10 }, (_, i) => i + 1).map(
-                          (n) => (
-                            <option key={n} value={n}>
-                              {n}
-                            </option>
-                          ),
-                        )}
+                        {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
+                          <option key={n} value={n}>
+                            {n}
+                          </option>
+                        ))}
                       </select>
-                    </label>
-                    <button
-                      type="button"
-                      onClick={() => removeItem(product.id)}
-                      className="text-sm font-medium text-danger hover:underline"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </div>
-                <p className="shrink-0 font-bold text-ink">
-                  {formatPrice(product.price * quantity)}
-                </p>
-              </div>
-            ))}
-          </div>
+                      <button
+                        type="button"
+                        onClick={() => removeItem(product.id)}
+                        className="cart-link"
+                      >
+                        Delete
+                      </button>
+                    </div>
 
-          <aside className="h-fit border border-slate-200 bg-card p-6 shadow-sm">
-            <h2 className="text-lg font-bold text-ink">Order Summary</h2>
-            <div className="mt-4 space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted">Subtotal</span>
-                <span className="font-semibold">{formatPrice(subtotal)}</span>
+                    <p className="cart-money">{formatPrice(product.price)}</p>
+                    <p className="cart-money">
+                      {formatPrice(product.price * quantity)}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted">Shipping</span>
-                <span className="font-semibold">
-                  {freeShip ? "FREE" : "Calculated at checkout"}
-                </span>
-              </div>
-              {!freeShip && (
-                <p className="rounded-md bg-brand/20 px-3 py-2 text-xs font-medium text-ink">
-                  Add {formatPrice(remaining)} more for free shipping
-                </p>
-              )}
-              <div className="flex justify-between border-t border-border pt-3 text-base">
-                <span className="font-bold">Estimated Total</span>
-                <span className="font-black">{formatPrice(subtotal)}</span>
+
+              <div className="cart-actions">
+                <Link href="/shop" className="cart-btn cart-btn-keep">
+                  Keep Shopping
+                </Link>
+                <Link href="/checkout" className="cart-btn cart-btn-checkout">
+                  Checkout ({itemCount})
+                </Link>
               </div>
             </div>
-            <button
-              type="button"
-              className="mt-6 w-full rounded-sm bg-[#ffe000] py-3 text-sm font-black uppercase tracking-wide text-[#17212b] hover:bg-[#edc900]"
-            >
-              Checkout (Demo)
-            </button>
-            <Link
-              href="/shop"
-              className="mt-3 block text-center text-sm font-semibold text-accent hover:underline"
-            >
-              Continue Shopping
-            </Link>
-          </aside>
-        </div>
+
+            <aside className="cart-summary">
+              <div className="cart-summary-box">
+                <div className="cart-summary-row">
+                  <span>Items</span>
+                  <span>{formatPrice(subtotal)}</span>
+                </div>
+                <div className="cart-summary-row">
+                  <span>
+                    Shipping & Processing
+                    <br />
+                    <small>({freeShip ? "Super Saver" : "Standard"})</small>
+                  </span>
+                  <span>{freeShip ? "FREE" : formatPrice(shipping)}</span>
+                </div>
+                <div className="cart-summary-total">
+                  <span>Total</span>
+                  <span>{formatPrice(total)}</span>
+                </div>
+              </div>
+
+              <div className="cart-offer-box">
+                <input placeholder="Offer Code (Optional)" />
+                <button type="button">Apply</button>
+              </div>
+            </aside>
+          </div>
+
+          <CartProductShelf
+            title="Inspired By Your Browsing History"
+            products={inspired}
+          />
+          <CartProductShelf title="Recently Viewed Items" products={recent} />
+        </>
       )}
     </div>
   );

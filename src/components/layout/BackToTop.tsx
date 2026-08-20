@@ -18,9 +18,21 @@ export function BackToTop() {
     <button
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-5 right-5 z-40 rounded-sm bg-[#075aaa] px-3 py-2 text-[11px] font-black uppercase tracking-wide text-white shadow-lg hover:bg-[#064b8e]"
+      aria-label="Back to top"
+      className="fixed bottom-5 right-5 z-40 grid h-11 w-11 place-items-center rounded-full bg-[#075aaa] text-white shadow-[0_3px_10px_rgba(0,0,0,.3)] transition-colors hover:bg-[#064b8e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#075aaa]"
     >
-      Back to top
+      <svg
+        viewBox="0 0 24 24"
+        className="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="m6 15 6-6 6 6" />
+      </svg>
     </button>
   );
 }

@@ -16,9 +16,9 @@ export function BuyBox({ product }: { product: Product }) {
   };
 
   return (
-    <div className="mt-4">
-      <label className="mb-3 flex items-center gap-2 text-[14px] text-[#34495e]">
-        Qty
+    <div className="mt-5">
+      <label className="mb-4 flex items-center gap-3 text-[14px] font-bold uppercase text-[#003366]">
+        Quantity
         <select
           value={qty}
           onChange={(e) => setQty(Number(e.target.value))}
@@ -33,6 +33,7 @@ export function BuyBox({ product }: { product: Product }) {
       </label>
 
       <button type="button" onClick={onAdd} disabled={disabled} className="pdp-buy-btn">
+        {!disabled && <span aria-hidden>🛒</span>}
         {disabled
           ? "Sold Out"
           : product.status === "pre-order"
@@ -40,12 +41,12 @@ export function BuyBox({ product }: { product: Product }) {
             : "Add to Cart"}
       </button>
 
-      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+      <div className="mt-3 grid justify-items-center gap-3">
         <button type="button" className="pdp-link">
-          + Add to Wish List
+          ♡ Add to Wish List
         </button>
         <button type="button" className="pdp-link">
-          Email me when in stock
+          ♧ Alert when in Stock
         </button>
       </div>
 

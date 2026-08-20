@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import { CartProvider } from "@/components/cart/CartProvider";
-import { BrandCarousel } from "@/components/home/BrandCarousel";
 import { BackToTop } from "@/components/layout/BackToTop";
+import { ConditionalSiteChrome } from "@/components/layout/ConditionalSiteChrome";
 import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
-import { PromoBar } from "@/components/layout/PromoBar";
 import { site } from "@/data/catalog";
 import "./globals.css";
 
@@ -30,9 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${sourceSans.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <CartProvider>
-          <PromoBar />
-          <Header />
-          <BrandCarousel />
+          <ConditionalSiteChrome />
           <main id="maincontent" className="flex-1">
             {children}
           </main>

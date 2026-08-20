@@ -1,18 +1,26 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/lib/types";
-import { ProductCard } from "./ProductCard";
+
+type CarouselItem = {
+  id: string;
+  name: string;
+  href: string;
+  image: string;
+};
 
 export function ProductCarousel({
   title,
-  products,
+  items,
   viewAllHref,
+  variant = "products",
 }: {
   title: string;
-  products: Product[];
+  items: CarouselItem[];
   viewAllHref: string;
+  variant?: "products" | "logos";
 }) {
   const scroller = useRef<HTMLDivElement>(null);
 
@@ -23,48 +31,54 @@ export function ProductCarousel({
   };
 
   return (
-    <section className="mt-8">
+    <section className="pdp-carousel-section">
       <div className="mb-3 flex items-center justify-between gap-4">
         <h2 className="pdp-section-title">{title}</h2>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => scroll(-1)}
-            aria-label="Scroll left"
-            className="hidden h-8 w-8 items-center justify-center text-[#9aa3ab] hover:text-[#075aaa] sm:flex"
-          >
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M15 5 8 12l7 7" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={() => scroll(1)}
-            aria-label="Scroll right"
-            className="hidden h-8 w-8 items-center justify-center text-[#9aa3ab] hover:text-[#075aaa] sm:flex"
-          >
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="m9 5 7 7-7 7" />
-            </svg>
-          </button>
-          <Link
-            href={viewAllHref}
-            className="text-sm font-semibold text-[#075aaa] hover:underline"
-          >
-            View All {title}
-          </Link>
+      </div>
+      <div className="pdp-carousel-row">
+        <button
+          type="button"
+          onClick={() => scroll(-1)}
+          aria-label={`Previous ${title}`}
+          className="pdp-shelf-arrow"
+        >
+          ‹
+        </button>
+        <div ref={scroller} className="pdp-carousel-track no-scrollbar">
+          {items.map((item) => (
+            <div key={item.id} className={variant === "logos" ? "pdp-category-slide" : "pdp-product-slide"}>
+              <Link href={item.href} className={variant === "logos" ? "pdp-logo-card" : "pdp-mini-card"}>
+                <span className={variant === "logos" ? "pdp-logo-media" : "pdp-mini-media"}>
+                  <Image
+                    src={item.image}
+                    alt=""
+                    fill
+                    sizes="180px"
+                    className="object-contain"
+                  />
+                </span>
+                <span className="pdp-mini-title line-clamp-3">{item.name}</span>
+              </Link>
+            </div>
+          ))}
         </div>
+        <button
+          type="button"
+          onClick={() => scroll(1)}
+          aria-label={`Next ${title}`}
+          className="pdp-shelf-arrow"
+        >
+          ›
+        </button>
       </div>
-      <div
-        ref={scroller}
-        className="no-scrollbar flex snap-x snap-mandatory gap-[10px] overflow-x-auto pb-2"
-      >
-        {products.map((p) => (
-          <div key={p.id} className="w-[171px] shrink-0 snap-start">
-            <ProductCard product={p} variant="compact" />
-          </div>
-        ))}
+      <div className="pdp-shelf-dots" aria-hidden>
+        <span />
+        <span />
+        <span />
       </div>
+      <Link href={viewAllHref} className="sr-only">
+        View All {title}
+      </Link>
     </section>
   );
 }
